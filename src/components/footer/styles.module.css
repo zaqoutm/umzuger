@@ -1,0 +1,19 @@
+.footer {
+  min-height: 300px;
+  background: #f2f2f2;
+  padding: 12px;
+}
+
+.footerContainer {
+  max-width: 1200px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.logo img {
+  width: 200px;
+  height: auto;
+}

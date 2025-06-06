@@ -1,0 +1,23 @@
+.nav {
+  min-height: 400px;
+  background: rgba(var(--accent-rgb), 0.05);
+}
+
+.navContainer {
+  max-width: 1200px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.logo img {
+  width: 200px;
+  height: auto;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 12px;
+}
