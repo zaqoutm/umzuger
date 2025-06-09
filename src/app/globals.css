@@ -5,6 +5,19 @@
   --accent: #9322c5;
   --accent-rgb: 147, 34, 197;
   --accent-dark: #611f69;
+
+  --warning: #fcc003;
+  --warning-rgb: 225, 192, 3;
+  --danger: #ff5a5a;
+  --danger-rgb: 225, 90, 90;
+  --success: #41b658;
+  --success-rgb: 65, 182, 88;
+  --info: #1ab9ff;
+  --info-rgb: 26, 185, 255;
+}
+
+html {
+  background-color: rgba(var(--accent-rgb), 0.05);
 }
 
 html,
@@ -48,4 +61,54 @@ h2 {
 
 .children {
   min-height: 90vh;
+}
+
+/*  */
+/*  */
+/* HTML elements */
+button {
+  padding: 12px 24px;
+  border-radius: 4px;
+  background-color: var(--accent-dark);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: var(--accent-dark);
+}
+
+input {
+  display: flex;
+  padding: 8px;
+  width: auto;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #dfdfdf;
+}
+
+/*  */
+/*  */
+/*  */
+/* classes */
+.alert-info,
+.alert-warning,
+.alert-error {
+  padding: 8px;
+  font-weight: bold;
+  margin: 12px;
+}
+
+.alert-info {
+  background: rgba(var(--info-rgb), 0.04);
+  color: var(--info);
+}
+.alert-warning {
+  background: rgba(var(--info-rgb), 0.04);
+  color: var(--warning);
+}
+.alert-error {
+  background: rgba(var(--danger-rgb), 0.04);
+  color: var(--danger);
 }

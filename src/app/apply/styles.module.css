@@ -1,0 +1,18 @@
+.page {
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  border: 1px solid;
+  min-height: 300px;
+}
