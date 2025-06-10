@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import { motion } from "motion/react";
 
 export default function Home() {
   const router = useRouter();
@@ -12,7 +13,60 @@ export default function Home() {
   return (
     <div>
       <div className={styles.introSection}>
-        <h1>Company name Lösungen</h1>
+        {/*  */}
+        <motion.div
+          initial={{ x: 50 }}
+          animate={{ x: 0 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          className={`${styles["block"]} ${styles["firstBlock"]}`}
+        >
+          <p>Umzüge</p>
+          <svg width='28' height='26' viewBox='0 0 35 33' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <path
+              d='M2.42805 0.635892L33.6053 12.5968C34.4459 12.9193 34.4655 14.1014 33.6361 14.4517L21.6734 19.503C21.4013 19.6179 21.1938 19.8473 21.1068 20.1295L17.7852 30.9008C17.5204 31.7595 16.3454 31.8603 15.9382 31.0592L1.17842 2.02268C0.763439 1.20629 1.57301 0.307862 2.42805 0.635892Z'
+              fill='#FCC003'
+              stroke='#D2A20B'
+            />
+          </svg>
+        </motion.div>
+
+        {/*  */}
+        <div className={styles.introSectionTitle}>
+          <h1>[Company] Lösungen</h1>
+          <p className='secondary-color'>Wie können wir Ihnen helfen?</p>
+        </div>
+
+        {/*  */}
+        <div className={styles.introSectionBottom}>
+          <motion.div
+            initial={{ rotateZ: -4 }}
+            animate={{ x: 20 }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+            className={styles.block}
+          >
+            <p>Möbel Montage</p>
+          </motion.div>
+          <motion.div
+            initial={{ y: 0 }}
+            animate={{ y: -20 }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+            className={styles.block}
+          >
+            <p>Wohnungsauflösung</p>
+          </motion.div>
+        </div>
       </div>
 
       <div className={styles.page}>
