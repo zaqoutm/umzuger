@@ -2,13 +2,26 @@
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import { motion } from "motion/react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
 
-  function handleClick() {
-    router.push(`/apply?von=${"Heilbron"}&nach=${"Berlin"}`);
-  }
+  type Inputs = {
+    von: string;
+    nach: string;
+  };
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<Inputs>({ defaultValues: {} });
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    router.push(`/apply?von=${data.von}&nach=${data.nach}`);
+  };
 
   return (
     <div>
@@ -71,30 +84,46 @@ export default function Home() {
 
       <div className={styles.page}>
         <div className={styles.roundTop}>
-          {/* <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'>
+          {/* fill='#9322c5' */}
+          {/* fillOpacity='0.05' */}
+
+          <svg width='900' viewBox='0 0 900 8' fill='none' xmlns='http://www.w3.org/2000/svg'>
             <path
-              fill='#9322c5'
+              d='M0 6H8.8C17.7 6 35.3 6 53 6.2C70.7 6.3 88.3 6.7 106 6C123.7 5.3 141.3 3.7 159 2.8C176.7 2 194.3 2 212 2C229.7 2 247.3 2 265 3.2C282.7 4.3 300.3 6.7 318 7C335.7 7.3 353.3 5.7 371 5C388.7 4.3 406.3 4.7 423.8 4.8C441.3 5 458.7 5 476.2 4.3C493.7 3.7 511.3 2.3 529 2.3C546.7 2.3 564.3 3.7 582 4.7C599.7 5.7 617.3 6.3 635 5.7C652.7 5 670.3 3 688 2.3C705.7 1.7 723.3 2.3 741 2.3C758.7 2.3 776.3 1.7 794 2.5C811.7 3.3 829.3 5.7 847 5.5C864.7 5.3 882.3 2.7 891.2 1.3L900 0H891.2C882.3 0 864.7 0 847 0C829.3 0 811.7 0 794 0C776.3 0 758.7 0 741 0C723.3 0 705.7 0 688 0C670.3 0 652.7 0 635 0C617.3 0 599.7 0 582 0C564.3 0 546.7 0 529 0C511.3 0 493.7 0 476.2 0C458.7 0 441.3 0 423.8 0C406.3 0 388.7 0 371 0C353.3 0 335.7 0 318 0C300.3 0 282.7 0 265 0C247.3 0 229.7 0 212 0C194.3 0 176.7 0 159 0C141.3 0 123.7 0 106 0C88.3 0 70.7 0 53 0C35.3 0 17.7 0 8.8 0H0V6Z'
+              fill='var(--accent)'
               fillOpacity='0.05'
-              d='M0,32L60,53.3C120,75,240,117,360,128C480,139,600,117,720,144C840,171,960,245,1080,240C1200,235,1320,149,1380,106.7L1440,64L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z'
-            ></path>
-          </svg> */}
+            />
+          </svg>
         </div>
 
         <div className={styles.pageContainer}>
+          {/*  */}
           {/* form section */}
           <div className={styles.formSection}>
             <h1>Wohin?</h1>
             <p>Es ist ganz einfach: Teilen Sie uns Ihr Anliegen mit und wir kontaktieren Sie</p>
-
-            <div className={styles.form}>
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
               <div className={styles.inputs}>
-                <input type='text' placeholder='VonVon ( Ort oder PLZ )' />
-                <input type='text' placeholder='Nach?' />
+                {/* iconedInput */}
+
+                <div className={styles.iconedInput}>
+                  <Image src='/location.svg' alt='' width={18} height={18} loading='eager' />
+                  <input
+                    placeholder='VonVon ( Ort oder PLZ )'
+                    {...register("von", { required: true, minLength: 4 })}
+                    className={errors.von && "inputError"}
+                  />
+                </div>
+                <div className={styles.iconedInput}>
+                  <Image src='/location.svg' alt='' width={18} height={18} loading='eager' />
+                  <input placeholder='Nach?' {...register("nach", { required: true, minLength: 4 })} className={errors.nach && "inputError"} />
+                </div>
               </div>
-              <button onClick={handleClick}>Apply now</button>
-            </div>
+              <button type='submit'>Apply now</button>
+            </form>
           </div>
 
+          {/*  */}
           {/* contact section */}
           <div className={styles.contactSection}>
             <h2>Kontaktieren Sie uns direkt</h2>

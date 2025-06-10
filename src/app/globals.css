@@ -5,6 +5,7 @@
   --accent: #9322c5;
   --accent-rgb: 147, 34, 197;
   --accent-dark: #611f69;
+  --accent-dark-rgb: 97, 31, 105;
 
   --warning: #fcc003;
   --warning-rgb: 225, 192, 3;
@@ -68,24 +69,40 @@ h2 {
 /* HTML elements */
 button {
   padding: 12px 24px;
-  border-radius: 4px;
+  border: none;
+  border-radius: 8px;
   background-color: var(--accent-dark);
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: var(--accent-dark);
+  background-color: rgba(var(--accent-dark-rgb), 0.8);
+}
+button:disabled {
+  background-color: rgba(var(--accent-dark-rgb), 0.1);
 }
 
 input {
   display: flex;
+  background-color: #fff;
   padding: 8px;
   width: auto;
   align-items: center;
-  border-radius: 8px;
-  border: 1px solid #dfdfdf;
+  border: 2px solid #fff;
+  border-bottom-color: #f2f2f2;
+  font-weight: bold;
+}
+input:focus {
+  outline: none;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+.inputError {
+  border-bottom-color: var(--danger);
+  color: var(--danger);
 }
 
 /*  */
