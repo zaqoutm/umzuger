@@ -54,50 +54,6 @@
 }
 
 /*  */
-/* form section */
-.formSection {
-  padding: 24px 0;
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-}
-.form {
-  margin-top: 15px;
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
-}
-.inputs {
-  display: flex;
-  gap: 12px;
-}
-
-/* input with icon */
-.iconedInput {
-  position: relative;
-  display: flex;
-}
-.iconedInput input {
-  padding-left: 24px;
-}
-.iconedInput img {
-  width: 20px;
-  height: auto;
-  height: 14px;
-  pointer-events: none;
-  position: absolute;
-  left: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-/*  */
 /*  */
 /*  */
 .transportImage {
@@ -105,7 +61,7 @@
   justify-content: center;
 }
 .transportImage img {
-  width: 700px;
+  max-width: 700px;
   height: auto;
 }
 
@@ -128,8 +84,15 @@
 .contactSectionLinks a {
   border: 1px solid #ddd;
   padding: 24px 34px;
+  border-radius: 6px;
 }
 .contactSectionLinks a img {
   width: 34px;
   height: auto;
+  transition: scale 0.6s, transform 0.3s, opacity 0.5s;
+}
+.contactSectionLinks a:hover img {
+  opacity: 0.7;
+  scale: 1.6;
+  transform: rotateZ(-5deg);
 }
