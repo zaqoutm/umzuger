@@ -4,8 +4,13 @@ import styles from "./page.module.css";
 import { motion } from "motion/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
+  const company_email = "example@mail.com";
+  const company_phone = "+49123456789";
+  const whatsappPhone = "+49123456789";
+
   const router = useRouter();
 
   type Inputs = {
@@ -123,12 +128,33 @@ export default function Home() {
             </form>
           </div>
 
+          <div className={styles.transportImage}>
+            <Image src={"/Moving-pana.svg"} alt='' width={24} height={24} loading='eager' />
+          </div>
+
           {/*  */}
           {/* contact section */}
           <div className={styles.contactSection}>
-            <h2>Kontaktieren Sie uns direkt</h2>
-            <p>Montag - Sontag</p>
-            <p>8:00 - 20:00 Uhr</p>
+            <div>
+              <h2>Kontaktieren Sie uns direkt</h2>
+              <p>Montag - Sontag</p>
+              <p>8:00 - 20:00 Uhr</p>
+            </div>
+            <div className={styles.contactSectionLinks}>
+              <Link href={`tel:${company_phone}`}>
+                <Image src={"/phone.svg"} width={34} height={34} alt='phone-icon' />
+              </Link>
+              <Link href={`https://wa.me/${whatsappPhone}`}>
+                <Image src={"/whatsapp-icon.svg"} width={34} height={34} alt='phone-icon' />
+              </Link>
+              <Link href={`mailto:${company_email}`}>
+                <Image src={"/email-icon.svg"} width={34} height={34} alt='phone-icon' />
+              </Link>
+            </div>
+          </div>
+
+          <div className={styles.transportImage}>
+            <Image src={"/Moving-pana-2.svg"} alt='' width={24} height={24} loading='eager' />
           </div>
         </div>
       </div>

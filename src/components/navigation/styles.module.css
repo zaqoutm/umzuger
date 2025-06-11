@@ -12,11 +12,15 @@
 }
 
 .logo img {
-  width: 200px;
+  width: 100px;
   height: auto;
 }
 
 .socialLinks {
   display: flex;
   gap: 12px;
+}
+.socialLinks img {
+  width: 24px;
+  height: auto;
 }
