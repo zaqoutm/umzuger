@@ -10,7 +10,7 @@ export default function Footer() {
         <Link href={"/"}>
           <Image src='/next.svg' alt='logo' width={width_height} height={width_height} loading='eager' />
         </Link>
-        <Link href={"https://github.com/zaqoutm"} className={styles.dev}>
+        <Link href={"https://github.com/zaqoutm"} className={styles.dev} target='_blank'>
           <Image src='/github-icon.svg' alt='developer' width={width_height} height={width_height} loading='eager' />
           <p>Entwikler</p>
         </Link>

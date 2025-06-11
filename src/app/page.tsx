@@ -42,7 +42,6 @@ export default function Home() {
         {/*  */}
         <div className={styles.introSectionBottom}>
           <motion.div
-            initial={{ rotateZ: -4 }}
             animate={{ x: 20 }}
             transition={{
               duration: 10,

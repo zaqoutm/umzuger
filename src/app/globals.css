@@ -86,19 +86,15 @@ button:disabled {
 }
 
 input {
-  display: flex;
-  background-color: #fff;
-  padding: 8px;
-  width: auto;
-  align-items: center;
-  border: 2px solid #fff;
-  border-bottom-color: #f2f2f2;
+  border: none;
+  border-bottom: 2px solid var(--accent-dark);
   font-weight: bold;
+  border-radius: 0;
 }
 input:focus {
   outline: none;
   background-color: #f2f2f2;
-  border-radius: 4px;
+  /* border-radius: 4px; */
 }
 .inputError {
   border-bottom-color: var(--danger);
@@ -134,4 +130,20 @@ input:focus {
 }
 .secondary-color {
   color: var(--secondary);
+}
+
+/*  Responsivness  */
+/*  */
+/*  */
+/*  */
+/* >= small desktop  */
+@media screen and (min-width: 960px) {
+}
+@media screen and (max-width: 1059px) and (min-width: 960px) {
+}
+/* <=Tablet */
+@media screen and (max-width: 959px) {
+}
+/* <=phone */
+@media screen and (max-width: 767px) {
 }

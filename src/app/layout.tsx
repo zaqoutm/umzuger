@@ -4,6 +4,7 @@ import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import Footer from "@/components/footer/Footer";
 import Navigation from "@/components/navigation/Navigation";
+import type { Viewport } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,6 +21,14 @@ export const metadata: Metadata = {
   description: "Umzugsunternehmen",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  // Also supported but less commonly used
+  // interactiveWidget: 'resizes-visual',
+};
 export default function RootLayout({
   children,
 }: Readonly<{

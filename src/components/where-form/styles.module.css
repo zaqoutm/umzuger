@@ -39,3 +39,30 @@
   top: 50%;
   transform: translateY(-50%);
 }
+
+@media screen and (max-width: 767px) {
+  .formSection {
+    border-radius: 0;
+    padding-bottom: 0;
+  }
+  .formSection p {
+    display: flex;
+    padding: 8px;
+    text-align: center;
+  }
+  .form {
+    flex-wrap: wrap;
+    border-radius: 0;
+    margin-top: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+  .inputs {
+    padding: 0px 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .iconedInput input {
+    padding: 22px 0px 24px 24px;
+  }
+}

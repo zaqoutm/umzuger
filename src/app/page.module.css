@@ -20,6 +20,7 @@
 }
 .introSectionBottom {
   display: flex;
+  justify-content: space-between;
   gap: 120px;
   min-height: 120px;
 }
@@ -82,7 +83,7 @@
   gap: 24px;
 }
 .contactSectionLinks a {
-  border: 1px solid #ddd;
+  border: 1px solid #f2f2f2;
   padding: 24px 34px;
   border-radius: 6px;
 }
@@ -95,4 +96,40 @@
   opacity: 0.7;
   scale: 1.6;
   transform: rotateZ(-5deg);
+}
+
+/*  Responsivness  */
+/*  */
+/*  */
+/*  */
+/* >= small desktop  */
+@media screen and (min-width: 960px) {
+}
+@media screen and (max-width: 1059px) and (min-width: 960px) {
+}
+/* <=Tablet */
+@media screen and (max-width: 959px) {
+}
+/* <=phone */
+@media screen and (max-width: 767px) {
+  .introSection {
+    padding: 38px 24px 0 24px;
+  }
+  .introSectionTitle h1 {
+    font-size: 24px;
+  }
+  .introSectionBottom {
+    gap: 12px;
+    padding: 18px 0;
+    width: 100%;
+  }
+  .block {
+    padding: 8px;
+  }
+  .transportImage img {
+    max-width: 350px;
+  }
+  .contactSectionLinks {
+    gap: 12px;
+  }
 }
