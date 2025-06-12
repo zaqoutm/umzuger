@@ -3,16 +3,80 @@
   margin-inline: auto;
 }
 
-.header {
+.stepper {
   display: flex;
-  justify-content: center;
-  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 300px;
+  margin-top: 24px;
 }
 
-.steps {
+.header {
+  width: 80%;
+  padding: 12px;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  gap: 21px;
+}
+.headerItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+}
+.stepNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: #ddd;
+}
+.stepTitle {
+  color: #ddd;
+}
+.activeStepTitle {
+  color: var(--accent);
+}
+
+.activeStepNumber {
+  background-color: rgba(var(--accent-rgb), 0.05);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.stepsContainer {
+  width: 100%;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+}
+.step {
+  display: none;
+  border-radius: 12px;
   padding: 24px;
-  border: 1px solid;
-  min-height: 300px;
+  border: 2px solid #f2f2f2;
+}
+.activeStep {
+  display: block;
+}
+.stepsButtons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  padding: 12px;
+}
+
+.separator {
+  display: flex;
+  margin: 12px 0;
+  height: 2px;
+  min-width: 100px;
+  background-color: #f2f2f2;
 }
