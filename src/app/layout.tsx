@@ -5,6 +5,8 @@ import NextTopLoader from "nextjs-toploader";
 import Footer from "@/components/footer/Footer";
 import Navigation from "@/components/navigation/Navigation";
 import type { Viewport } from "next";
+import "@ant-design/v5-patch-for-react-19";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +41,9 @@ export default function RootLayout({
       <body className={`${roboto.variable} ${geistSans.variable}`}>
         <NextTopLoader speed={800} color='linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff)' showSpinner={false} />
         <Navigation />
-        <div className='children'>{children}</div>
+        <AntdRegistry>
+          <div className='children'>{children}</div>
+        </AntdRegistry>
         <Footer />
       </body>
     </html>

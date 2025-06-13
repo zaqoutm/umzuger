@@ -1,7 +1,9 @@
 :root {
   --background: #ffffff;
   --foreground: #272937;
-  --secondary: #616161;
+  --secondary: #6e6e6e;
+  --secondary-light: #b5b5b5;
+  --secondary-light1: #d9d9d9;
   --accent: #9322c5;
   --accent-rgb: 147, 34, 197;
   --accent-dark: #611f69;
@@ -66,66 +68,7 @@ h2 {
 
 /*  */
 /*  */
-/* HTML elements */
-button {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--accent-dark);
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: rgba(var(--accent-dark-rgb), 0.8);
-}
-button:disabled {
-  background-color: rgba(var(--accent-dark-rgb), 0.2);
-  cursor: not-allowed;
-}
-
-input {
-  border: none;
-  border-bottom: 2px solid var(--accent-dark);
-  font-weight: bold;
-  border-radius: 0;
-}
-input:focus {
-  outline: none;
-  background-color: #f2f2f2;
-  /* border-radius: 4px; */
-}
-.inputError {
-  border-bottom-color: var(--danger);
-  color: var(--danger);
-}
-
-/*  */
-/*  */
-/*  */
 /* classes */
-.alert-info,
-.alert-warning,
-.alert-error {
-  padding: 8px;
-  font-weight: bold;
-  margin: 12px;
-}
-
-.alert-info {
-  background: rgba(var(--info-rgb), 0.04);
-  color: var(--info);
-}
-.alert-warning {
-  background: rgba(var(--info-rgb), 0.04);
-  color: var(--warning);
-}
-.alert-error {
-  background: rgba(var(--danger-rgb), 0.04);
-  color: var(--danger);
-}
 .flex {
   display: flex;
 }

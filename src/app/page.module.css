@@ -16,7 +16,8 @@
   background-color: #fff;
   height: fit-content;
 }
-.introSectionTitle {
+.introSectionTitle p {
+  color: var(--secondary);
 }
 .introSectionBottom {
   display: flex;

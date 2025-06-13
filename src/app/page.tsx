@@ -36,7 +36,7 @@ export default function Home() {
         {/*  */}
         <div className={styles.introSectionTitle}>
           <h1>[Company] Lösungen</h1>
-          <p className='secondary-color'>Wie können wir Ihnen helfen?</p>
+          <p>Wie können wir Ihnen helfen?</p>
         </div>
 
         {/*  */}

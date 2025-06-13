@@ -8,36 +8,18 @@
   justify-content: center;
 }
 .form {
-  margin-top: 15px;
+  margin-top: 25px !important;
   border-radius: 12px;
-  padding: 20px;
+  padding: 16px 12px !important;
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 14px;
   box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
 }
 .inputs {
   display: flex;
+  align-items: center;
   gap: 12px;
-}
-
-/* input with icon */
-.iconedInput {
-  position: relative;
-  display: flex;
-}
-.iconedInput input {
-  padding-left: 24px;
-}
-.iconedInput img {
-  width: 20px;
-  height: auto;
-  height: 14px;
-  pointer-events: none;
-  position: absolute;
-  left: 6px;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 @media screen and (max-width: 767px) {
@@ -61,8 +43,5 @@
     padding: 0px 12px;
     flex-wrap: wrap;
     justify-content: center;
-  }
-  .iconedInput input {
-    padding: 22px 0px 24px 24px;
   }
 }
