@@ -1,8 +1,8 @@
-import styles from "./page.module.css";
-import Image from "next/image";
-import Link from "next/link";
 import WohinFormComponent from "@/components/where-form/page";
 import * as motion from "motion/react-client";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./page.module.css";
 
 export default function Home() {
   const company_email = "example@mail.com";
