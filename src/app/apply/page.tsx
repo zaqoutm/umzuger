@@ -11,11 +11,12 @@ export type AuszugortType = {
   street?: string;
   streetNumber?: string;
   ausZugAus: {
-    homeType?: ["WOHNUNG", "HAUS", "ZIMMER"]; // radio
-    livingSpace?: number; // input max 4 m2
-    rooms?: number; // select  max 7
-    degreeOfFurnishing?: ["LOW", "MID", "HEIGH"];
-    storageAreas?: number; // input max 4 m2
+    homeType?: "wohnung" | "haus" | "zimmer"; // radio
+    livingSpace?: string; // input max 4 m2
+    rooms?: string; // select  max 7
+    floor?: string; // select
+    degreeOfFurnishing?: "low" | "mid" | "high"; // radio
+    storageAreas?: string; // input max 4 m2
   };
 };
 type EinzugortType = {
