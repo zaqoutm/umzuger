@@ -22,19 +22,19 @@
 .dev {
   display: flex;
   align-items: center;
-  border: 1px solid var(--accent-dark);
-  background-color: rgba(var(--accent-dark-rgb), 0.05);
-  border-radius: 24px;
-  padding: 5px 16px;
-  gap: 12px;
-  color: var(--accent-dark);
+  background-color: var(--accent-dark);
+  border-radius: 22px;
+  padding: 5px 21px;
+  gap: 6px;
+  color: #fff;
+  font-size: 12px;
 }
 .dev img {
   width: 24px;
   height: auto;
 }
 .dev:hover {
-  background-color: rgba(var(--accent-dark-rgb), 0.2);
+  background-color: rgba(var(--accent-dark-rgb), 0.8);
 }
 
 .separator {

@@ -2,6 +2,9 @@ import WohinFormComponent from "@/components/where-form/page";
 import * as motion from "motion/react-client";
 import Image from "next/image";
 import Link from "next/link";
+import { BsWhatsapp } from "react-icons/bs";
+import { FaPhoneAlt } from "react-icons/fa";
+import { MdOutlineMailOutline } from "react-icons/md";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -100,13 +103,13 @@ export default function Home() {
             </div>
             <div className={styles.contactSectionLinks}>
               <Link href={`tel:${company_phone}`}>
-                <Image src={"/phone.svg"} width={34} height={34} alt='phone-icon' />
+                <FaPhoneAlt size={34} />
               </Link>
               <Link href={`https://wa.me/${whatsappPhone}`}>
-                <Image src={"/whatsapp-icon.svg"} width={34} height={34} alt='phone-icon' />
+                <BsWhatsapp size={34} />
               </Link>
               <Link href={`mailto:${company_email}`}>
-                <Image src={"/email-icon.svg"} width={34} height={34} alt='phone-icon' />
+                <MdOutlineMailOutline size={34} />
               </Link>
             </div>
           </div>

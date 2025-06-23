@@ -1,6 +1,8 @@
 import Image from "next/image";
-import styles from "./styles.module.css";
 import Link from "next/link";
+import { BsTwitterX } from "react-icons/bs";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import styles from "./styles.module.css";
 
 export default function Navigation() {
   const width_height = 18;
@@ -16,13 +18,13 @@ export default function Navigation() {
         </div>
         <div className={styles.socialLinks}>
           <Link href={"https://instagram.com/companyname"} target='_blank'>
-            <Image src='/insta-icon.svg' alt='instagram' width={width_height} height={width_height} loading='eager' />
+            <FaInstagram size={24} />
           </Link>
           <Link href={"https://facebook.com/companyname"} target='_blank'>
-            <Image src='/fb-icon.svg' alt='facebook' width={width_height} height={width_height} loading='eager' />
+            <FaFacebookF size={24} />
           </Link>
           <Link href={"https://x.com/companyname"} target='_blank'>
-            <Image src='/x-icon.svg' alt='x.com' width={width_height} height={width_height} loading='eager' />
+            <BsTwitterX size={24} />
           </Link>
         </div>
       </div>

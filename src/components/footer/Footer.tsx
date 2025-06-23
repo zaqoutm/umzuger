@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IoLogoGithub } from "react-icons/io5";
 import styles from "./styles.module.css";
 
 export default function Footer() {
@@ -11,7 +12,7 @@ export default function Footer() {
           <Image src='/next.svg' alt='logo' width={width_height} height={width_height} loading='eager' />
         </Link>
         <Link href={"https://github.com/zaqoutm"} className={styles.dev} target='_blank'>
-          <Image src='/github-icon.svg' alt='developer' width={width_height} height={width_height} loading='eager' />
+          <IoLogoGithub size={21} />
           <p>Entwikler</p>
         </Link>
       </div>
