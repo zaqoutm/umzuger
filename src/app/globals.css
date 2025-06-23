@@ -97,8 +97,10 @@ h2 {
 /* loading page */
 .loadingPage {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 24px;
   min-height: 400px;
+  gap: 24px;
 }

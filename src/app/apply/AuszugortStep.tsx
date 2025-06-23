@@ -1,8 +1,10 @@
 import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { FcInfo } from "react-icons/fc";
 import { PiSignpostLight } from "react-icons/pi";
 import { TbMeterSquare } from "react-icons/tb";
+import CustomRadioGroup from "./CustomRadioGroup";
 import InputNumberX from "./InputNumberX";
 import InputX from "./InputX";
 import { AuszugortType } from "./page";
@@ -102,11 +104,14 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
             </div>
 
             <div className={styles.inputContainer}>
-              <p className={styles.tip}>Tipp: Geben Sie eine Straße an, um genauere Angebote zu erhalten.</p>
               <div className={styles.inputsGroupRow}>
                 <InputX name='street' placeholder='Straße' inputRef={streetRef} />
                 <InputX name='streetNumber' placeholder='Nr.' isDisabled={isStreetNumberDisabled} />
               </div>
+              <p className={styles.extraInfo}>
+                <FcInfo size={18} />
+                Tipp: Geben Sie eine Straße an, um genauere Angebote zu erhalten.
+              </p>
             </div>
           </div>
 
@@ -182,21 +187,33 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
 
             {/*  */}
             <div className={styles.inputContainer}>
+              <br />
               <h4>Möblierungsgrad</h4>
               <p>Bitte wählen Sie das Bild aus, welches Ihre Wohnung am besten widerspiegelt</p>
 
               {/*  */}
-              {/*  */}
-              {/*  */}
-              {/* TODO: */}
-              {/* custom with pics */}
-              <RadioX
+              <CustomRadioGroup
                 name='ausZugAus.degreeOfFurnishing'
-                defaultValue={"LOW"}
+                defaultValue={"low"}
                 options={[
-                  { value: "low", label: "niedrig" },
-                  { value: "mid", label: "mittel" },
-                  { value: "high", label: "hoch" },
+                  {
+                    value: "low",
+                    label: "niedrig",
+                    image: "niedrig.png",
+                    info: "Weniger als die Hälfte der Bodenfläche ist mit Möbeln belegt.",
+                  },
+                  {
+                    value: "mid",
+                    label: "mittel",
+                    image: "mid.png",
+                    info: "50 - 70 % der Bodenfläche ist mit Möbeln belegt.",
+                  },
+                  {
+                    value: "high",
+                    label: "hoch",
+                    image: "hoch.png",
+                    info: "Mehr als 70 % der Bodenfläche ist mit Möbeln belegt.",
+                  },
                 ]}
               />
             </div>

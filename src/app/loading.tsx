@@ -1,7 +1,12 @@
+import { Spin } from "antd";
+
 export default function Loading() {
   return (
     <div className='loadingPage'>
-      <h2>Bitte warten...</h2>
+      <div>
+        <Spin size='large' />
+      </div>
+      <h1>Bitte warten...</h1>
     </div>
   );
 }
