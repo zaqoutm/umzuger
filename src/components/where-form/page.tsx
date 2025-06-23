@@ -1,10 +1,10 @@
 "use client";
-import styles from "./styles.module.css";
-import { useRouter } from "next/navigation";
 import type { FormProps } from "antd";
 import { Button, Form, Input, Space } from "antd";
-import { IoLocationSharp } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 import { GrFormNextLink } from "react-icons/gr";
+import { IoLocationSharp } from "react-icons/io5";
+import styles from "./styles.module.css";
 
 export default function WohinFormComponent() {
   const router = useRouter();
@@ -16,7 +16,8 @@ export default function WohinFormComponent() {
   };
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    // console.log("Success:", values);
+    console.log("Success:", values);
+    // show loading
     router.push(`/apply?von=${values.von}&nach=${values.nach}`);
   };
 
@@ -34,34 +35,35 @@ export default function WohinFormComponent() {
       <h1>Wohin?</h1>
       <p>Es ist ganz einfach: Teilen Sie uns Ihr Anliegen mit und wir kontaktieren Sie</p>
 
-      <Form form={form} name='basic' className={styles.form} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete='off'>
+      <Form
+        form={form}
+        name='basic'
+        className={styles.form}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete='off'
+      >
         <div className={styles.inputs}>
           <Space.Compact size='large'>
-            <Form.Item<FieldType>
-              noStyle
-              name='von'
-              rules={[
-                { min: 5, message: "", warningOnly: true },
-                { required: true, message: "" },
-              ]}
-            >
+            <Form.Item<FieldType> noStyle name='von' rules={[]}>
               <Input size='large' placeholder='Von ( Ort oder PLZ )' prefix={<IoLocationSharp />} />
             </Form.Item>
-            <Form.Item<FieldType>
-              noStyle
-              name='nach'
-              rules={[
-                { min: 5, message: "", warningOnly: true },
-                { required: true, message: "" },
-              ]}
-            >
+            <Form.Item<FieldType> noStyle name='nach'>
               <Input size='large' placeholder='Nach?' prefix={<IoLocationSharp />} />
             </Form.Item>
           </Space.Compact>
         </div>
 
         <Form.Item label={null} className='btn' noStyle>
-          <Button size='large' variant='solid' color='purple' htmlType='submit' icon={<GrFormNextLink />} iconPosition='end'>
+          <Button
+            loading={!form.isFieldsValidating}
+            size='large'
+            variant='solid'
+            color='purple'
+            htmlType='submit'
+            icon={<GrFormNextLink />}
+            iconPosition='end'
+          >
             Jetzt bewerben
           </Button>
         </Form.Item>

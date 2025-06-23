@@ -15,6 +15,7 @@ export default function RadioX(props: PropsType) {
       render={({ field }) => (
         <>
           <Radio.Group
+            size='large'
             {...field}
             defaultValue={props.defaultValue}
             options={props.options}

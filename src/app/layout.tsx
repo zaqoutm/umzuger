@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
-import { Geist, Roboto } from "next/font/google";
-import "./globals.css";
-import NextTopLoader from "nextjs-toploader";
 import Footer from "@/components/footer/Footer";
 import Navigation from "@/components/navigation/Navigation";
-import type { Viewport } from "next";
-import "@ant-design/v5-patch-for-react-19";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import "@ant-design/v5-patch-for-react-19";
+import type { Metadata, Viewport } from "next";
+import { Geist, Roboto } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +38,11 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${roboto.variable} ${geistSans.variable}`}>
-        <NextTopLoader speed={800} color='linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff)' showSpinner={false} />
+        <NextTopLoader
+          speed={800}
+          color='linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff)'
+          showSpinner={false}
+        />
         <Navigation />
         <AntdRegistry>
           <div className='children'>{children}</div>

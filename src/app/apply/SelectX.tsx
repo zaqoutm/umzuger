@@ -1,22 +1,23 @@
 import { CheckboxOptionType, Select } from "antd";
-import { Controller } from "react-hook-form";
+import { Controller, RegisterOptions } from "react-hook-form";
 
 interface PropsType {
   name: string;
   options: CheckboxOptionType[];
   defaultValue?: string;
   placeHolder?: string;
+  rules?: RegisterOptions;
 }
 
 export default function SelectX(props: PropsType) {
   return (
     <Controller
       name={props.name}
-      rules={{ required: "Bitte wählen Sie eine Antwort aus." }}
+      rules={props.rules}
       render={({ field, fieldState }) => (
         <>
-          <h1>{props.defaultValue}</h1>
           <Select
+            size='large'
             placeholder={props.placeHolder}
             {...field}
             options={props.options}

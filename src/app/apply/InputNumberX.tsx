@@ -1,12 +1,14 @@
 import { InputNumber } from "antd";
-import { Controller, ValidationRule } from "react-hook-form";
+import { ReactNode } from "react";
+import { Controller, RegisterOptions } from "react-hook-form";
 
 interface PropsType {
   name: string;
   placeholder?: string;
-  pattern?: ValidationRule<RegExp>;
+  rules?: RegisterOptions;
   maxLength?: number;
   isDisabled?: boolean;
+  iconSuffix?: ReactNode;
 }
 
 export default function InputNumberX(props: PropsType) {
@@ -16,15 +18,18 @@ export default function InputNumberX(props: PropsType) {
     // --------------- form-hook Controller
     <Controller
       name={props.name}
-      rules={{
-        required: `${props.placeholder} erforderlich`,
-        pattern: props.pattern,
-      }}
+      rules={props.rules}
+      // rules={{
+      //   required: `${props.placeholder} erforderlich`,
+      //   pattern: props.pattern,
+      // }}
       render={({ field, fieldState }) => (
         // ------------- antd input
         //
         <>
           <InputNumber
+            size='large'
+            style={{ width: "100%" }}
             {...field}
             stringMode
             disabled={props.isDisabled}
@@ -33,6 +38,7 @@ export default function InputNumberX(props: PropsType) {
             maxLength={props.maxLength}
             placeholder={props.placeholder}
             status={fieldState.invalid ? "error" : ""}
+            suffix={props.iconSuffix}
           />
           {fieldState.error && <div style={{ color: "red", fontSize: 12 }}>{fieldState.error.message}</div>}
         </>

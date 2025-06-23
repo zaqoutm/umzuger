@@ -1,5 +1,8 @@
+import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { PiSignpostLight } from "react-icons/pi";
+import { TbMeterSquare } from "react-icons/tb";
 import InputNumberX from "./InputNumberX";
 import InputX from "./InputX";
 import { AuszugortType } from "./page";
@@ -11,12 +14,15 @@ interface PropsType {
   stepButtons: any;
   next: any;
   data: any;
+  searchParams?: ReadonlyURLSearchParams;
 }
 
 /**
  *
  */
 function AuszugortStep({ stepButtons, next, data }: PropsType) {
+  const searhParams = useSearchParams();
+
   const streetRef = useRef(null);
   const formxAuszugsort = useForm<AuszugortType>({
     defaultValues: {
@@ -26,8 +32,6 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
   const { subscribe, setValue } = formxAuszugsort;
 
   function submit(data: AuszugortType) {
-    // console.log(data);
-    // console.log(data.ausZugAus);
     next(data);
   }
 
@@ -35,6 +39,10 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
 
   /** */
   useEffect(() => {
+    console.log(searhParams.get("x"));
+    // TODO: check regix
+    // set plz
+
     /**
      * set data if founded
      */
@@ -80,79 +88,108 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
           {/*  */}
           <div className={styles.formBox}>
             <h2>Auszugsort</h2>
-            <InputNumberX
-              name='plz'
-              placeholder='PLZ'
-              maxLength={5}
-              pattern={{
-                value: /^\d{5}$/,
-                message: "PLZ muss 5 Ziffern haben",
-              }}
-            />
-            <div className={styles.inputsGroupRow}>
-              <InputX name='street' placeholder='Straße' inputRef={streetRef} />
-              <InputX name='streetNumber' placeholder='Nr.' isDisabled={isStreetNumberDisabled} />
+            <div className={styles.inputContainer}>
+              <InputNumberX
+                name='plz'
+                placeholder='PLZ'
+                iconSuffix={<PiSignpostLight />}
+                maxLength={5}
+                rules={{
+                  required: "PLZ. erforderlich",
+                  pattern: { value: /^\d{5}$/, message: "PLZ. muss 5 Ziffern haben" },
+                }}
+              />
+            </div>
+
+            <div className={styles.inputContainer}>
+              <p className={styles.tip}>Tipp: Geben Sie eine Straße an, um genauere Angebote zu erhalten.</p>
+              <div className={styles.inputsGroupRow}>
+                <InputX name='street' placeholder='Straße' inputRef={streetRef} />
+                <InputX name='streetNumber' placeholder='Nr.' isDisabled={isStreetNumberDisabled} />
+              </div>
             </div>
           </div>
 
           {/*  */}
           <div className={styles.formBox}>
             <h2>Auszug aus</h2>
-
             {/*  */}
-            <RadioX
-              name='ausZugAus.homeType'
-              options={[
-                { value: "wohnung", label: "Wohnung" },
-                { value: "haus", label: "Haus" },
-                { value: "zimmer", label: "Zimmer" },
-              ]}
-            />
+            <div className={styles.inputContainer}>
+              <RadioX
+                name='ausZugAus.homeType'
+                options={[
+                  { value: "wohnung", label: "Wohnung" },
+                  { value: "haus", label: "Haus" },
+                  { value: "zimmer", label: "Zimmer" },
+                ]}
+              />
+            </div>
 
             <div className={styles.inputsGroupRow}>
-              {/*  */}
-              <div>
+              {/* Wohnfläche */}
+              <div className={styles.inputContainer}>
                 <InputNumberX
                   name='ausZugAus.livingSpace'
                   placeholder='Wohnfläche'
+                  iconSuffix={<TbMeterSquare size={24} />}
                   maxLength={4}
-                  pattern={{
-                    value: /^\d{4}$/,
-                    message: "PLZ muss 4 Ziffern haben",
+                  rules={{
+                    required: "Bitte geben Sie die Wohnfläche an.",
+                    pattern: { value: /^\d{1,4}$/, message: "" },
                   }}
                 />
-                <span>m²</span>
               </div>
               {/*  */}
+            </div>
+
+            <div className={styles.inputContainer}>
               <SelectX
                 name='ausZugAus.rooms'
                 placeHolder='Zimmeranzahl'
+                rules={{ required: "Bitte wählen Sie eine Antwort aus." }}
                 options={[
                   { value: "1", label: <span>1 Zimmer</span> },
                   { value: "2", label: "2 Zimmer" },
                   { value: "3", label: "3 Zimmer" },
-                  { value: "4", label: "3 Zimmer" },
-                  { value: "5", label: "3 Zimmer" },
+                  { value: "4", label: "4 Zimmer" },
+                  { value: "5", label: "5 Zimmer" },
+                  { value: "6", label: "6 Zimmer" },
+                  { value: "7", label: "7 Zimmer" },
+                  { value: "100", label: "mehr als 7 Zimmer" },
                 ]}
               />
             </div>
 
             {/*  */}
-            <SelectX
-              name='ausZugAus.floor'
-              placeHolder='Etage'
-              options={[
-                { value: "souterrain", label: "Souterrain" },
-                { value: "erdgeschoss", label: "Erdgeschoss" },
-                { value: "1", label: "1. Etage" },
-                { value: "2", label: "2. Etage" },
-                { value: "3", label: "3. Etage" },
-              ]}
-            />
+            <div className={styles.inputContainer}>
+              <SelectX
+                name='ausZugAus.floor'
+                placeHolder='Etage'
+                rules={{ required: "Bitte geben Sie eine Etage an." }}
+                options={[
+                  { value: "souterrain", label: "Souterrain" },
+                  { value: "erdgeschoss", label: "Erdgeschoss" },
+                  { value: "hochparterre", label: "Hochparterre" },
+                  { value: "1", label: "1. Etage" },
+                  { value: "2", label: "2. Etage" },
+                  { value: "3", label: "3. Etage" },
+                  { value: "4", label: "4. Etage" },
+                  { value: "5", label: "5. Etage" },
+                  { value: "6", label: "6. Etage order höher" },
+                ]}
+              />
+            </div>
 
             {/*  */}
-            <div>
-              <p>Möblierungsgrad</p>
+            <div className={styles.inputContainer}>
+              <h4>Möblierungsgrad</h4>
+              <p>Bitte wählen Sie das Bild aus, welches Ihre Wohnung am besten widerspiegelt</p>
+
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/* TODO: */}
+              {/* custom with pics */}
               <RadioX
                 name='ausZugAus.degreeOfFurnishing'
                 defaultValue={"LOW"}
@@ -165,19 +202,20 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
             </div>
 
             {/*  */}
-            <div>
+            <div className={styles.inputContainer}>
               <p>Weitere Flächen mit Umzugsgut (z.B. Keller)</p>
               <InputNumberX
                 name='ausZugAus.storageAreas'
                 placeholder='Lagerflächen'
                 maxLength={4}
-                pattern={{
-                  value: /^\d{4}$/,
-                  message: "PLZ muss 4 Ziffern haben",
+                rules={{
+                  pattern: { value: /^\d{0,4}$/, message: "" },
                 }}
+                iconSuffix={<TbMeterSquare size={24} />}
               />
-              <span>m²</span>
             </div>
+
+            {/*  */}
           </div>
 
           {stepButtons}

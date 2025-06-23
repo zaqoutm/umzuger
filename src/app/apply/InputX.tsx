@@ -19,6 +19,7 @@ export default function InputX(props: PropsType) {
       render={({ field, fieldState }) => (
         <>
           <Input
+            size='large'
             {...field}
             onChange={(e) => {
               field.onChange(e);

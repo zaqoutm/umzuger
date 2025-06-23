@@ -93,3 +93,12 @@ h2 {
 /* <=phone */
 @media screen and (max-width: 767px) {
 }
+
+/* loading page */
+.loadingPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  min-height: 400px;
+}

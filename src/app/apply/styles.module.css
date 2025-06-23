@@ -7,13 +7,13 @@
   margin-top: 54px;
 }
 .stepContent {
-  min-height: 400px;
+  /* min-height: 400px; */
   padding: 24px 8px;
 }
 .stepsButtons {
   display: flex;
   justify-content: flex-end;
-  padding: 24px;
+  padding: 24px 0;
   margin-bottom: 24px;
 }
 .separator {
@@ -35,16 +35,34 @@
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  /* gap: 12px; */
   padding: 54px 56px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   /* box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px -6px, rgba(0, 0, 0, 0.1) 0px 2px 4px -1px; */
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.08);
-  margin-bottom: 24px;
+  box-shadow: 0 0px 34px rgba(0, 0, 0, 0.05);
+  margin-bottom: 32px;
 }
 .formBox h2 {
   font-weight: 400;
+  margin-bottom: 24px;
 }
 .inputsGroupRow {
   display: flex;
+  align-items: flex-start;
   gap: 12px;
+}
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  width: 100%;
+  gap: 8px;
+  /* border: 1px solid deeppink; */
+}
+
+.tip {
+  border: 1px solid var(--border);
+  font-size: 12px;
+  padding: 12px 6px;
 }

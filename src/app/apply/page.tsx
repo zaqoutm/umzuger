@@ -39,6 +39,7 @@ export default function ApplyPage() {
 
   const next = () => {
     setCurrent(currentStep + 1);
+    window.scrollTo(0, 0);
   };
   const prev = () => {
     setCurrent(currentStep - 1);
@@ -81,7 +82,9 @@ export default function ApplyPage() {
       */}
 
       <div className={styles.stepper}>
-        <Steps size='small' items={steps} current={currentStep} />
+        <Steps size='small' items={steps} current={currentStep} labelPlacement='vertical' />
+
+        {/*  */}
         <div className={styles.stepContent}>
           {currentStep == 0 ? (
             // mount, unmount to dom
