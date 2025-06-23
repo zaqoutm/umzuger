@@ -4,26 +4,7 @@ import { useEffect, useState } from "react";
 import { GrFormNextLink } from "react-icons/gr";
 import AuszugortStep from "./AuszugortStep";
 import styles from "./styles.module.css";
-
-export type AuszugortType = {
-  // location
-  plz?: string;
-  street?: string;
-  streetNumber?: string;
-  ausZugAus: {
-    homeType?: "wohnung" | "haus" | "zimmer"; // radio
-    livingSpace?: string; // input max 4 m2
-    rooms?: string; // select  max 7
-    floor?: string; // select
-    degreeOfFurnishing?: "low" | "mid" | "high"; // radio
-    storageAreas?: string; // input max 4 m2
-  };
-};
-type EinzugortType = {
-  einzugPLZ?: string;
-  einzugStreet?: string;
-  einzugStreetNumber?: string;
-};
+import { AuszugortType, EinzugortType } from "./types";
 
 type FinalFormDataType = {
   auszugort?: AuszugortType;

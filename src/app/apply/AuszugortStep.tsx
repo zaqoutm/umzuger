@@ -1,4 +1,4 @@
-import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { FcInfo } from "react-icons/fc";
@@ -7,16 +7,15 @@ import { TbMeterSquare } from "react-icons/tb";
 import CustomRadioGroup from "./CustomRadioGroup";
 import InputNumberX from "./InputNumberX";
 import InputX from "./InputX";
-import { AuszugortType } from "./page";
 import RadioX from "./RadioX";
 import SelectX from "./SelectX";
 import styles from "./styles.module.css";
+import { AuszugortType } from "./types";
 
 interface PropsType {
   stepButtons: any;
   next: any;
   data: any;
-  searchParams?: ReadonlyURLSearchParams;
 }
 
 /**
@@ -28,16 +27,22 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
   const streetRef = useRef(null);
   const formxAuszugsort = useForm<AuszugortType>({
     defaultValues: {
-      ausZugAus: { homeType: "wohnung", degreeOfFurnishing: "low" },
+      plz: "12345",
+      ausZugAus: { homeType: "wohnung", degreeOfFurnishing: "low", floor: "2", rooms: undefined, livingSpace: "8" },
+      laufweg: {
+        parkzone: "3",
+      },
     },
   });
   const { subscribe, setValue } = formxAuszugsort;
 
   function submit(data: AuszugortType) {
+    console.log(data);
     next(data);
   }
 
   const [isStreetNumberDisabled, setIsStreetNumberDisabled] = useState(true);
+  const [showZimmerInput, setShowZimmer] = useState(true);
 
   /** */
   useEffect(() => {
@@ -61,6 +66,9 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
       setValue("ausZugAus.floor", data.ausZugAus.floor);
       setValue("ausZugAus.degreeOfFurnishing", data.ausZugAus.degreeOfFurnishing);
       setValue("ausZugAus.storageAreas", data.ausZugAus.storageAreas);
+      if (!data.ausZugAus.rooms) setShowZimmer(false);
+
+      setValue("laufweg.parkzone", data.laufweg.parkzone);
     }
 
     /**
@@ -71,10 +79,23 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
         values: true,
       },
       callback: ({ values }) => {
+        //
+        if (values.ausZugAus.homeType === "zimmer") {
+          setShowZimmer(false);
+          if (values.ausZugAus.rooms) {
+            setValue("ausZugAus.rooms", "");
+          }
+        } else {
+          setShowZimmer(true);
+        }
+
         if (values.street) {
           setIsStreetNumberDisabled(false);
         } else {
           setIsStreetNumberDisabled(true);
+          if (values.streetNumber) {
+            setValue("streetNumber", "");
+          }
         }
       },
     });
@@ -130,6 +151,26 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
               />
             </div>
 
+            {showZimmerInput && (
+              <div className={styles.inputContainer}>
+                <SelectX
+                  name='ausZugAus.rooms'
+                  placeHolder='Zimmeranzahl'
+                  rules={{ required: "Bitte wählen Sie eine Antwort aus." }}
+                  options={[
+                    { value: "1", label: <span>1 Zimmer</span> },
+                    { value: "2", label: "2 Zimmer" },
+                    { value: "3", label: "3 Zimmer" },
+                    { value: "4", label: "4 Zimmer" },
+                    { value: "5", label: "5 Zimmer" },
+                    { value: "6", label: "6 Zimmer" },
+                    { value: "7", label: "7 Zimmer" },
+                    { value: "100", label: "mehr als 7 Zimmer" },
+                  ]}
+                />
+              </div>
+            )}
+
             <div className={styles.inputsGroupRow}>
               {/* Wohnfläche */}
               <div className={styles.inputContainer}>
@@ -145,24 +186,6 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
                 />
               </div>
               {/*  */}
-            </div>
-
-            <div className={styles.inputContainer}>
-              <SelectX
-                name='ausZugAus.rooms'
-                placeHolder='Zimmeranzahl'
-                rules={{ required: "Bitte wählen Sie eine Antwort aus." }}
-                options={[
-                  { value: "1", label: <span>1 Zimmer</span> },
-                  { value: "2", label: "2 Zimmer" },
-                  { value: "3", label: "3 Zimmer" },
-                  { value: "4", label: "4 Zimmer" },
-                  { value: "5", label: "5 Zimmer" },
-                  { value: "6", label: "6 Zimmer" },
-                  { value: "7", label: "7 Zimmer" },
-                  { value: "100", label: "mehr als 7 Zimmer" },
-                ]}
-              />
             </div>
 
             {/*  */}
@@ -198,19 +221,19 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
                 options={[
                   {
                     value: "low",
-                    label: "niedrig",
+                    label: "Niedrig",
                     image: "niedrig.png",
                     info: "Weniger als die Hälfte der Bodenfläche ist mit Möbeln belegt.",
                   },
                   {
                     value: "mid",
-                    label: "mittel",
+                    label: "Mittel",
                     image: "mid.png",
                     info: "50 - 70 % der Bodenfläche ist mit Möbeln belegt.",
                   },
                   {
                     value: "high",
-                    label: "hoch",
+                    label: "Hoch",
                     image: "hoch.png",
                     info: "Mehr als 70 % der Bodenfläche ist mit Möbeln belegt.",
                   },
@@ -230,10 +253,42 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
                 }}
                 iconSuffix={<TbMeterSquare size={24} />}
               />
+              <p className={styles.extraInfo}>
+                <FcInfo size={18} />
+                Bitte geben Sie an, ob es über Ihre angegebene Wohnfläche hinaus weitere Flächen mit Umzugsgut gibt.
+                Hierzu zählen beispielsweise Kellerräume, Dachboden, ein Garten- oder Gerätehaus oder eine Garage, die
+                zur Lagerung genutzt wird. Bitte zählen Sie nur die zusätzlichen Flächen, die Sie nicht bei der
+                Wohnfläche angegeben haben.
+              </p>
             </div>
-
-            {/*  */}
           </div>
+
+          {/*  */}
+          <div className={styles.formBox}>
+            <h2>Laufweg</h2>
+            <div className={styles.inputContainer}>
+              <p>Laufweg von Parkzone</p>
+              <SelectX
+                name='laufweg.parkzone'
+                placeHolder='Bitte wählen'
+                rules={{ required: "Bitte wählen Sie eine Antwort aus." }}
+                options={[
+                  { value: "10", label: "bis 10 m" },
+                  { value: "20", label: "10-20 m" },
+                  { value: "30", label: "10-30 m" },
+                  { value: "40", label: "10-40 m" },
+                  { value: "50", label: "10-50 m" },
+                  { value: "60", label: "über 50 m" },
+                ]}
+              />
+              <p className={styles.extraInfo}>
+                <FcInfo size={18} />
+                Wie lang ist der Weg zwischen der potenziellen Park- und Beladezone für den Transporter des
+                Umzugsunternehmens und Ihrer Wohnungstür?
+              </p>
+            </div>
+          </div>
+          {/*  */}
 
           {stepButtons}
         </form>

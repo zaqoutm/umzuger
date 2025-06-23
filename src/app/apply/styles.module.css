@@ -99,17 +99,21 @@
 }
 
 .checked {
-  color: blueviolet;
+  color: var(--accent);
   box-shadow: 0 0px 34px rgba(0, 0, 0, 0.05);
   padding-bottom: 24px;
 }
 .extraInfo {
   display: flex;
-  gap: 4px;
-  align-items: center;
+  gap: 5px;
+  align-items: flex-start;
   border: 1px solid var(--border);
   padding: 6px 12px;
   font-size: 13px;
   border-radius: 12px;
   box-shadow: 0 0px 34px rgba(0, 0, 0, 0.05);
+}
+
+.extraInfo svg {
+  flex-shrink: 0;
 }
