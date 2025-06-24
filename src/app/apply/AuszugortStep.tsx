@@ -1,15 +1,15 @@
+import CheckX from "@/components/inputs/CheckX";
+import CustomRadioGroup from "@/components/inputs/CustomRadioGroup";
+import InputNumberX from "@/components/inputs/InputNumberX";
+import InputX from "@/components/inputs/InputX";
+import RadioX from "@/components/inputs/RadioX";
+import SelectX from "@/components/inputs/SelectX";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { FcInfo } from "react-icons/fc";
 import { PiSignpostLight } from "react-icons/pi";
 import { TbMeterSquare } from "react-icons/tb";
-import CheckX from "./CheckX";
-import CustomRadioGroup from "./CustomRadioGroup";
-import InputNumberX from "./InputNumberX";
-import InputX from "./InputX";
-import RadioX from "./RadioX";
-import SelectX from "./SelectX";
 import styles from "./styles.module.css";
 import { AuszugortType } from "./types";
 
