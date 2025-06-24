@@ -5,7 +5,6 @@ import { Controller } from "react-hook-form";
 interface PropsType {
   name: string;
   options?: CheckboxGroupProps<string>["options"];
-  defaultValue?: string;
 }
 
 export default function RadioX(props: PropsType) {
@@ -14,15 +13,7 @@ export default function RadioX(props: PropsType) {
       name={props.name}
       render={({ field }) => (
         <>
-          <Radio.Group
-            size='large'
-            {...field}
-            defaultValue={props.defaultValue}
-            options={props.options}
-            block
-            optionType='button'
-            buttonStyle='solid'
-          />
+          <Radio.Group size='large' {...field} options={props.options} block optionType='button' buttonStyle='solid' />
         </>
       )}
     />

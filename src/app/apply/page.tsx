@@ -1,8 +1,9 @@
 "use client";
 import { Button, Steps } from "antd";
 import { useEffect, useState } from "react";
-import { GrFormNextLink } from "react-icons/gr";
+import { BsChevronLeft } from "react-icons/bs";
 import AuszugortStep from "./AuszugortStep";
+import EinzugStep from "./EinzugStep";
 import styles from "./styles.module.css";
 import { AuszugortType, EinzugortType } from "./types";
 
@@ -21,7 +22,6 @@ export default function ApplyPage() {
   const next = () => {
     setCurrent(currentStep + 1);
     window.scrollTo(0, 0);
-    setIsSubmitting(false);
   };
   const prev = () => {
     setCurrent(currentStep - 1);
@@ -29,38 +29,24 @@ export default function ApplyPage() {
 
   // handle auszugort form
   function updateAuszugData(data: AuszugortType) {
-    setIsSubmitting(true);
-    setFinalFormData({ auszugort: data });
-
-    // for loading simulation
-    setTimeout(() => {
-      next();
-    }, 1000);
+    setFinalFormData((prevState) => ({ ...prevState, auszugort: data }));
+    next();
   }
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  // handle Einzugort form, @next and prev
+  function updateEinzugData(data: EinzugortType) {
+    setFinalFormData((prevState) => ({ ...prevState, einzugort: data }));
+    next();
+  }
+  function updateEinzugDataPrev(data: EinzugortType) {
+    setFinalFormData((prevState) => ({ ...prevState, einzugort: data }));
+    prev();
+  }
 
-  const StepsButotns = (
-    <div className={styles.stepsButtons}>
-      {currentStep > 0 && (
-        <Button type='default' style={{ margin: "0 8px" }} onClick={prev}>
-          Previous
-        </Button>
-      )}
-      <Button
-        loading={isSubmitting}
-        htmlType='submit'
-        type='primary'
-        icon={<GrFormNextLink />}
-        iconPosition='end'
-        disabled={!(currentStep < steps.length - 1)}
-      >
-        Weiter
-      </Button>
-    </div>
-  );
-
-  useEffect(() => {}, [currentStep]);
+  useEffect(() => {
+    console.log("Aus: ", finalFormData?.auszugort);
+    console.log("Ein: ", finalFormData?.einzugort);
+  }, [currentStep]);
 
   return (
     <div className={styles.page}>
@@ -73,21 +59,23 @@ export default function ApplyPage() {
 
       <div className={styles.stepper}>
         <Steps size='small' items={steps} current={currentStep} labelPlacement='vertical' />
-
         {/*  */}
         <div className={styles.stepContent}>
           {currentStep == 0 ? (
-            // mount, unmount to dom
-            <AuszugortStep stepButtons={StepsButotns} next={updateAuszugData} data={finalFormData?.auszugort} />
+            <AuszugortStep next={updateAuszugData} data={finalFormData?.auszugort} />
           ) : currentStep == 1 ? (
-            <>
-              <div>
-                <h1>EinzugsortForm</h1>
-                {StepsButotns}
-              </div>
-            </>
+            <EinzugStep prev={updateEinzugDataPrev} next={updateEinzugData} data={finalFormData?.einzugort} />
           ) : (
-            <div>Termin</div>
+            <div>
+              <div className={styles.stepsButtons}>
+                <Button icon={<BsChevronLeft />} type='link' style={{ margin: "0 8px" }} onClick={prev}>
+                  zurück
+                </Button>
+                <Button type='primary' iconPosition='end'>
+                  Weiter
+                </Button>
+              </div>
+            </div>
           )}
         </div>
       </div>

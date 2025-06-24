@@ -1,12 +1,15 @@
+"use client";
 import CheckX from "@/components/inputs/CheckX";
 import CustomRadioGroup from "@/components/inputs/CustomRadioGroup";
 import InputNumberX from "@/components/inputs/InputNumberX";
 import InputX from "@/components/inputs/InputX";
 import RadioX from "@/components/inputs/RadioX";
 import SelectX from "@/components/inputs/SelectX";
+import { Button } from "antd";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { BiChevronRight } from "react-icons/bi";
 import { FcInfo } from "react-icons/fc";
 import { PiSignpostLight } from "react-icons/pi";
 import { TbMeterSquare } from "react-icons/tb";
@@ -14,7 +17,6 @@ import styles from "./styles.module.css";
 import { AuszugortType } from "./types";
 
 interface PropsType {
-  stepButtons: any;
   next: any;
   data: any;
 }
@@ -22,7 +24,7 @@ interface PropsType {
 /**
  *
  */
-function AuszugortStep({ stepButtons, next, data }: PropsType) {
+function AuszugortStep({ next, data }: PropsType) {
   const searhParams = useSearchParams();
 
   const streetRef = useRef(null);
@@ -38,7 +40,6 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
   const { subscribe, setValue } = formxAuszugsort;
 
   function submit(data: AuszugortType) {
-    console.log(data);
     next(data);
   }
 
@@ -47,7 +48,7 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
 
   /** */
   useEffect(() => {
-    console.log(searhParams.get("x"));
+    // console.log(searhParams.get("x"));
     // TODO: check regix
     // set plz
 
@@ -55,7 +56,6 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
      * set data if founded
      */
     if (data) {
-      console.log("setting data...");
       if (data.street) setIsStreetNumberDisabled(false);
       setValue("plz", data.plz);
       setValue("street", data.street);
@@ -228,7 +228,6 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
               {/*  */}
               <CustomRadioGroup
                 name='ausZugAus.degreeOfFurnishing'
-                defaultValue={"low"}
                 options={[
                   {
                     value: "low",
@@ -333,7 +332,12 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
           </div>
 
           {/*  */}
-          {stepButtons}
+          <div className={styles.stepsButtons}>
+            <></>
+            <Button htmlType='submit' type='primary' icon={<BiChevronRight />} iconPosition='end'>
+              Weiter
+            </Button>
+          </div>
         </form>
       </FormProvider>
     </div>

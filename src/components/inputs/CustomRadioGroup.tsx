@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
 import { FcInfo } from "react-icons/fc";
 import styles from "./styles.module.css";
@@ -13,28 +12,19 @@ type Option = {
 
 type Props = {
   name: string;
-  defaultValue: string;
   options: Option[];
 };
 
-const CustomRadioGroup = ({ name, defaultValue, options }: Props) => {
-  const [def, setDef] = useState(defaultValue);
-  const [info, setInfo] = useState("");
-
-  useEffect(() => {
-    setDef(defaultValue);
-    if (options) setInfo(options[0].info);
-  }, []);
-
+const CustomRadioGroup = ({ name, options }: Props) => {
   return (
     <Controller
       name={name}
       render={({ field }) => (
         <>
-          {info && (
+          {options && (
             <p className={styles.extraInfo}>
               <FcInfo size={18} />
-              {info}
+              {options[options.findIndex((x) => x.value === field.value)].info}
             </p>
           )}
 
@@ -42,9 +32,7 @@ const CustomRadioGroup = ({ name, defaultValue, options }: Props) => {
             {/*  */}
             {options.map((opt) => (
               <label
-                className={
-                  styles.label + " " + `${field.value === opt.value || def === opt.value ? styles.checked : ""}`
-                }
+                className={styles.label + " " + `${field.value === opt.value ? styles.checked : ""}`}
                 key={opt.value}
               >
                 <input
@@ -53,8 +41,6 @@ const CustomRadioGroup = ({ name, defaultValue, options }: Props) => {
                   checked={field.value === opt.value}
                   onChange={() => {
                     field.onChange(opt.value);
-                    setDef(opt.value);
-                    setInfo(opt.info);
                   }}
                   style={{ display: "none" }}
                 />

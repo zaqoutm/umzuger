@@ -31,7 +31,24 @@ export type AuszugortType = {
 //
 // Second step form data type
 export type EinzugortType = {
-  einzugPLZ?: string;
-  einzugStreet?: string;
-  einzugStreetNumber?: string;
+  plz?: string;
+  street?: string;
+  streetNumber?: string;
+  ausZugIn: {
+    homeType?: "wohnung" | "haus" | "zimmer"; // radio group
+    floor?: string; // select
+  };
+  laufweg: {
+    elevatorAvailable?: "ja" | "nein"; // radio
+    parkzone?: string; //select
+  };
+  zusatzleistungen: {
+    packing: boolean;
+    dismantlingFurniture: boolean;
+    dismantlingKitchen: boolean;
+    connectingWashingMachine: boolean;
+    drillingDowelingWork: boolean;
+    furnitureLift: boolean;
+    establishParkingZone: boolean;
+  };
 };
