@@ -4,6 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { FcInfo } from "react-icons/fc";
 import { PiSignpostLight } from "react-icons/pi";
 import { TbMeterSquare } from "react-icons/tb";
+import CheckX from "./CheckX";
 import CustomRadioGroup from "./CustomRadioGroup";
 import InputNumberX from "./InputNumberX";
 import InputX from "./InputX";
@@ -30,7 +31,7 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
       plz: "12345",
       ausZugAus: { homeType: "wohnung", degreeOfFurnishing: "low", floor: "2", rooms: undefined, livingSpace: "8" },
       laufweg: {
-        parkzone: "3",
+        parkzone: "30",
       },
     },
   });
@@ -69,6 +70,16 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
       if (!data.ausZugAus.rooms) setShowZimmer(false);
 
       setValue("laufweg.parkzone", data.laufweg.parkzone);
+
+      setValue("zusatzleistungen.packing", data.zusatzleistungen.packing);
+      setValue("zusatzleistungen.dismantlingFurniture", data.zusatzleistungen.dismantlingFurniture);
+      setValue("zusatzleistungen.dismantlingKitchen", data.zusatzleistungen.dismantlingKitchen);
+      setValue("zusatzleistungen.provisionBoxes", data.zusatzleistungen.provisionBoxes);
+      setValue("zusatzleistungen.storageFurniture", data.zusatzleistungen.storageFurniture);
+      setValue("zusatzleistungen.disposalFurniture", data.zusatzleistungen.disposalFurniture);
+      setValue("zusatzleistungen.finalCleaning", data.zusatzleistungen.finalCleaning);
+      setValue("zusatzleistungen.furnitureLift", data.zusatzleistungen.furnitureLift);
+      setValue("zusatzleistungen.establishParkingZone", data.zusatzleistungen.establishParkingZone);
     }
 
     /**
@@ -83,7 +94,7 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
         if (values.ausZugAus.homeType === "zimmer") {
           setShowZimmer(false);
           if (values.ausZugAus.rooms) {
-            setValue("ausZugAus.rooms", "");
+            setValue("ausZugAus.rooms", undefined);
           }
         } else {
           setShowZimmer(true);
@@ -288,8 +299,40 @@ function AuszugortStep({ stepButtons, next, data }: PropsType) {
               </p>
             </div>
           </div>
-          {/*  */}
 
+          {/*  */}
+          <div className={styles.formBox}>
+            <h2>Zusatzleistungen für Ihren Auszug</h2>
+            <div className={styles.inputContainer}>
+              <CheckX name={"zusatzleistungen.packing"} placeholder='Einpackservice von Umzugskartons' />
+            </div>
+            <div className={styles.inputContainer}>
+              <CheckX name={"zusatzleistungen.dismantlingFurniture"} placeholder='Abbau von Möbeln' />
+            </div>
+            <div className={styles.inputContainer}>
+              <CheckX name={"zusatzleistungen.dismantlingKitchen"} placeholder='Abbau von Küche' />
+            </div>
+            <div className={styles.inputContainer}>
+              <CheckX name={"zusatzleistungen.provisionBoxes"} placeholder='Bereitstellung von Umzugskartons' />
+            </div>
+            <div className={styles.inputContainer}>
+              <CheckX name={"zusatzleistungen.storageFurniture"} placeholder='Einlagerung von Möbeln' />
+            </div>
+            <div className={styles.inputContainer}>
+              <CheckX name={"zusatzleistungen.disposalFurniture"} placeholder='Entsorgung von Möbeln' />
+            </div>
+            <div className={styles.inputContainer}>
+              <CheckX name={"zusatzleistungen.finalCleaning"} placeholder='Endreinigung' />
+            </div>
+            <div className={styles.inputContainer}>
+              <CheckX name={"zusatzleistungen.furnitureLift"} placeholder='Verladung mit Möbellift' />
+            </div>
+            <div className={styles.inputContainer}>
+              <CheckX name={"zusatzleistungen.establishParkingZone"} placeholder='Einrichtung Halteverbotszone' />
+            </div>
+          </div>
+
+          {/*  */}
           {stepButtons}
         </form>
       </FormProvider>

@@ -1,5 +1,6 @@
+//
+// First step form data type
 export type AuszugortType = {
-  // location
   plz?: string;
   street?: string;
   streetNumber?: string;
@@ -14,8 +15,21 @@ export type AuszugortType = {
   laufweg: {
     parkzone?: string; //select
   };
+  zusatzleistungen: {
+    packing: boolean;
+    dismantlingFurniture: boolean;
+    dismantlingKitchen: boolean;
+    provisionBoxes: boolean;
+    storageFurniture: boolean;
+    disposalFurniture: boolean;
+    finalCleaning: boolean;
+    furnitureLift: boolean;
+    establishParkingZone: boolean;
+  };
 };
 
+//
+// Second step form data type
 export type EinzugortType = {
   einzugPLZ?: string;
   einzugStreet?: string;

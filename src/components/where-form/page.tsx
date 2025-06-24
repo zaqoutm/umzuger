@@ -2,6 +2,7 @@
 import type { FormProps } from "antd";
 import { Button, Form, Input, Space } from "antd";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { GrFormNextLink } from "react-icons/gr";
 import { IoLocationSharp } from "react-icons/io5";
 import styles from "./styles.module.css";
@@ -15,20 +16,14 @@ export default function WohinFormComponent() {
     nach?: string;
   };
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
-    // show loading
+    setIsSubmitting(true);
     router.push(`/apply?von=${values.von}&nach=${values.nach}`);
   };
 
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-    // console.log("Failed:", errorInfo);
-    const firstErrorField = errorInfo?.errorFields?.[0];
-    if (firstErrorField) {
-      form.scrollToField(firstErrorField.name[0], {});
-      form.focusField(firstErrorField.name[0]);
-    }
-  };
+  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {};
 
   return (
     <div className={styles.formSection}>
@@ -56,7 +51,7 @@ export default function WohinFormComponent() {
 
         <Form.Item label={null} className='btn' noStyle>
           <Button
-            loading={!form.isFieldsValidating}
+            loading={isSubmitting}
             size='large'
             variant='solid'
             color='purple'

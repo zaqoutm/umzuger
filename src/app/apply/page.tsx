@@ -21,6 +21,7 @@ export default function ApplyPage() {
   const next = () => {
     setCurrent(currentStep + 1);
     window.scrollTo(0, 0);
+    setIsSubmitting(false);
   };
   const prev = () => {
     setCurrent(currentStep - 1);
@@ -28,9 +29,16 @@ export default function ApplyPage() {
 
   // handle auszugort form
   function updateAuszugData(data: AuszugortType) {
+    setIsSubmitting(true);
     setFinalFormData({ auszugort: data });
-    next();
+
+    // for loading simulation
+    setTimeout(() => {
+      next();
+    }, 1000);
   }
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const StepsButotns = (
     <div className={styles.stepsButtons}>
@@ -40,6 +48,7 @@ export default function ApplyPage() {
         </Button>
       )}
       <Button
+        loading={isSubmitting}
         htmlType='submit'
         type='primary'
         icon={<GrFormNextLink />}
