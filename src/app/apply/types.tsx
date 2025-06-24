@@ -1,4 +1,10 @@
 //
+export type FinalFormDataType = {
+  auszugort?: AuszugortType;
+  einzugort?: EinzugortType;
+};
+
+//
 // First step form data type
 export type AuszugortType = {
   plz?: string;

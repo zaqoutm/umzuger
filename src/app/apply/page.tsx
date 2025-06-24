@@ -1,23 +1,18 @@
 "use client";
-import { Button, Steps } from "antd";
+import { Steps } from "antd";
 import { useEffect, useState } from "react";
-import { BsChevronLeft } from "react-icons/bs";
 import AuszugortStep from "./AuszugortStep";
 import EinzugStep from "./EinzugStep";
+import LastStep from "./LastStep";
 import styles from "./styles.module.css";
-import { AuszugortType, EinzugortType } from "./types";
-
-type FinalFormDataType = {
-  auszugort?: AuszugortType;
-  einzugort?: EinzugortType;
-};
+import { AuszugortType, EinzugortType, FinalFormDataType } from "./types";
 
 export default function ApplyPage() {
-  const steps = [{ title: "Auszugsort" }, { title: "Einzugsort" }, { title: "Termin" }];
+  const steps = [{ title: "Auszugsort" }, { title: "Einzugsort" }, { title: "Schicken" }];
   const [currentStep, setCurrent] = useState(0);
 
   // store all data here
-  const [finalFormData, setFinalFormData] = useState<FinalFormDataType>();
+  const [finalFormData, setFinalFormData] = useState<FinalFormDataType>({});
 
   const next = () => {
     setCurrent(currentStep + 1);
@@ -46,6 +41,7 @@ export default function ApplyPage() {
   useEffect(() => {
     console.log("Aus: ", finalFormData?.auszugort);
     console.log("Ein: ", finalFormData?.einzugort);
+    console.log("------------");
   }, [currentStep]);
 
   return (
@@ -66,16 +62,7 @@ export default function ApplyPage() {
           ) : currentStep == 1 ? (
             <EinzugStep prev={updateEinzugDataPrev} next={updateEinzugData} data={finalFormData?.einzugort} />
           ) : (
-            <div>
-              <div className={styles.stepsButtons}>
-                <Button icon={<BsChevronLeft />} type='link' style={{ margin: "0 8px" }} onClick={prev}>
-                  zurück
-                </Button>
-                <Button type='primary' iconPosition='end'>
-                  Weiter
-                </Button>
-              </div>
-            </div>
+            <LastStep prev={prev} data={finalFormData} />
           )}
         </div>
       </div>
