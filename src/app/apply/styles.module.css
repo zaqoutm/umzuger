@@ -80,6 +80,11 @@
   flex-direction: column;
   align-items: center;
 }
+.lastStep h2 {
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
 .lastStepContent {
   width: 100%;
   max-width: 600px;
@@ -93,7 +98,7 @@
   padding: 0;
   gap: 4px;
 }
-.lastStep .inputContainer span {
+.secondayText {
   color: var(--secondary-light);
 }
 .lastStep .inputContainer p {

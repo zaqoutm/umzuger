@@ -26,6 +26,7 @@ export default function EinzugStep({ next, data, prev }: PropsType) {
       ausZugIn: { homeType: "wohnung", floor: "2" },
       laufweg: {
         parkzone: "30",
+        elevatorAvailable: "no",
       },
     },
   });
@@ -160,7 +161,16 @@ export default function EinzugStep({ next, data, prev }: PropsType) {
             <h2>Aufzug & Laufweg</h2>
 
             {/*  */}
-
+            <div className={styles.inputContainer}>
+              <p>Aufzug vorhanden</p>
+              <RadioX
+                name='laufweg.elevatorAvailable'
+                options={[
+                  { value: "yes", label: "Ja" },
+                  { value: "no", label: "Nein" },
+                ]}
+              />
+            </div>
             <div className={styles.inputContainer}>
               <p>Laufweg von Parkzone</p>
               <SelectX

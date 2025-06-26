@@ -2,6 +2,7 @@
 export type FinalFormDataType = {
   auszugort?: AuszugortType;
   einzugort?: EinzugortType;
+  customer?: Customer;
 };
 
 //
@@ -19,7 +20,7 @@ export type AuszugortType = {
     storageAreas?: string; // input max 4
   };
   laufweg: {
-    elevatorAvailable?: "ja" | "nein"; // radio
+    elevatorAvailable?: "yes" | "no"; // radio
     parkzone?: string; //select
   };
   zusatzleistungen: {
@@ -46,7 +47,7 @@ export type EinzugortType = {
     floor?: string; // select
   };
   laufweg: {
-    elevatorAvailable?: "ja" | "nein"; // radio
+    elevatorAvailable?: "yes" | "no"; // radio
     parkzone?: string; //select
   };
   zusatzleistungen: {
@@ -58,4 +59,8 @@ export type EinzugortType = {
     furnitureLift?: boolean;
     establishParkingZone?: boolean;
   };
+};
+
+export type Customer = {
+  phoneOrEmail: string;
 };

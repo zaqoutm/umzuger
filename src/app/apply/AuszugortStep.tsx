@@ -6,7 +6,6 @@ import InputX from "@/components/inputs/InputX";
 import RadioX from "@/components/inputs/RadioX";
 import SelectX from "@/components/inputs/SelectX";
 import { Button } from "antd";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { BiChevronRight } from "react-icons/bi";
@@ -25,7 +24,7 @@ interface PropsType {
  *
  */
 function AuszugortStep({ next, data }: PropsType) {
-  const searhParams = useSearchParams();
+  // const searhParams = useSearchParams();
 
   const streetRef = useRef(null);
   const formxAuszugsort = useForm<AuszugortType>({
@@ -34,6 +33,7 @@ function AuszugortStep({ next, data }: PropsType) {
       ausZugAus: { homeType: "wohnung", degreeOfFurnishing: "low", floor: "2", rooms: undefined, livingSpace: "8" },
       laufweg: {
         parkzone: "30",
+        elevatorAvailable: "no",
       },
     },
   });
@@ -70,6 +70,7 @@ function AuszugortStep({ next, data }: PropsType) {
       if (!data.ausZugAus.rooms) setShowZimmer(false);
 
       setValue("laufweg.parkzone", data.laufweg.parkzone);
+      setValue("laufweg.elevatorAvailable", data.laufweg.elevatorAvailable);
 
       setValue("zusatzleistungen.packing", data.zusatzleistungen.packing);
       setValue("zusatzleistungen.dismantlingFurniture", data.zusatzleistungen.dismantlingFurniture);
@@ -276,6 +277,16 @@ function AuszugortStep({ next, data }: PropsType) {
           {/*  */}
           <div className={styles.formBox}>
             <h2>Laufweg</h2>
+            <div className={styles.inputContainer}>
+              <p>Aufzug vorhanden</p>
+              <RadioX
+                name='laufweg.elevatorAvailable'
+                options={[
+                  { value: "yes", label: "Ja" },
+                  { value: "no", label: "Nein" },
+                ]}
+              />
+            </div>
             <div className={styles.inputContainer}>
               <p>Laufweg von Parkzone</p>
               <SelectX

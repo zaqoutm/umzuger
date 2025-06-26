@@ -38,11 +38,7 @@ export default function ApplyPage() {
     prev();
   }
 
-  useEffect(() => {
-    console.log("Aus: ", finalFormData?.auszugort);
-    console.log("Ein: ", finalFormData?.einzugort);
-    console.log("------------");
-  }, [currentStep]);
+  useEffect(() => {}, [currentStep]);
 
   return (
     <div className={styles.page}>

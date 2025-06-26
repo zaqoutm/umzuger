@@ -13,14 +13,14 @@ export default function Footer() {
         </Link>
         <Link href={"https://github.com/zaqoutm"} className={styles.dev} target='_blank'>
           <IoLogoGithub size={21} />
-          <p>Entwikler</p>
+          <p>developer</p>
         </Link>
       </div>
       <div className={styles.separator} />
       <div className={styles.links}>
+        <p>.FirmaX.©</p>
         <Link href={"#"}>Datenschutz</Link>
         <Link href={"#"}>Cookie-Einstellungen</Link>
-        <p>© Company_name</p>
       </div>
     </div>
   );

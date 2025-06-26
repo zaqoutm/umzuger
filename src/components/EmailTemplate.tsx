@@ -89,15 +89,7 @@ function EmailTemplate({ firstName, data }: { firstName: string; data: FinalForm
 
         <div style={box}>
           <h1>Kundeninformationen</h1>
-          <a
-            style={{ display: "block", marginBottom: 12, padding: 12, borderBottom: "1px solid" }}
-            href='mailto:test@email.com'
-          >
-            E-Mail: test@email.com
-          </a>
-          <a style={link} href='tel:+4900123456789'>
-            Phone: 123456789
-          </a>
+          <p style={link}>Phone or E-Mail: {data.customer?.phoneOrEmail}</p>
         </div>
       </div>
     </div>

@@ -1,10 +1,15 @@
 "use client";
+import InputX from "@/components/inputs/InputX";
+import { sendEmail } from "@/lib/resend";
 import { Button, Divider, Spin } from "antd";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import { BsChevronLeft, BsSend } from "react-icons/bs";
+import { RiContactsLine } from "react-icons/ri";
 import { TbMeterSquare } from "react-icons/tb";
 import styles from "./styles.module.css";
-import { FinalFormDataType } from "./types";
+import { Customer, FinalFormDataType } from "./types";
 
 type PropsType = {
   prev: any;
@@ -13,39 +18,51 @@ type PropsType = {
 
 export default function LastStep({ prev, data }: PropsType) {
   const [showSpinner, setShowSpinner] = useState(false);
+  const form = useForm<Customer>();
+  const router = useRouter();
 
-  function send() {
-    // sendEmail();
-    // we need email, phone, ...etc
+  function submit(customerInputData: any) {
+    const xx: FinalFormDataType = {
+      auszugort: data.auszugort,
+      einzugort: data.einzugort,
+      customer: { phoneOrEmail: customerInputData.phoneOrEmail },
+    };
+    sendEmailNow(xx);
+  }
 
-    // TODOs:
-    // send email
-    // clean data
-    // redirect to /home
+  async function sendEmailNow(data: FinalFormDataType) {
+    const result = await sendEmail("Neu aufgabe", "Boss", data);
+    console.log(result);
     setShowSpinner(!showSpinner);
 
-    setTimeout(() => {
-      setShowSpinner(false);
-    }, 2000);
+    if (result.data?.id) {
+      // TODO: push on success page
+      router.push("/");
+    } else {
+      setShowSpinner(!showSpinner);
+      console.log(result.error);
+    }
   }
+
+  const emailOrPhoneRegexInternational = /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|\+?\d[\d\s\-()]{5,})$/;
 
   return (
     <div className={styles.lastStep}>
-      {/* view data */}
+      {showSpinner && <Spin size='large' fullscreen />}
 
+      {/*  */}
       <div className={styles.lastStepContent}>
         <h2>Auszugsort</h2>
-
         <div className={styles.inputContainer}>
-          <span>Adresse</span>
+          <p className={styles.secondayText}>Adresse</p>
           <p>{data.auszugort?.plz}</p>
         </div>
         <div className={styles.inputContainer}>
-          <span>Auszug aus</span>
+          <p className={styles.secondayText}>Auszug aus</p>
           <p>{data.auszugort?.ausZugAus.homeType}</p>
         </div>
         <div className={styles.inputContainer}>
-          <span>Wohnfläche</span>
+          <p className={styles.secondayText}>Wohnfläche</p>
           <p>
             {data.auszugort?.ausZugAus.livingSpace} <TbMeterSquare size={18} />
           </p>
@@ -54,47 +71,72 @@ export default function LastStep({ prev, data }: PropsType) {
 
       <Divider />
 
+      {/*  */}
       <div className={styles.lastStepContent}>
         <h2>Einzugsort</h2>
-
         <div className={styles.inputContainer}>
-          <span>Adresse</span>
+          <p className={styles.secondayText}>Adresse</p>
           <p>{data.einzugort?.plz}</p>
         </div>
         <div className={styles.inputContainer}>
-          <span>Einzug in</span>
+          <p className={styles.secondayText}>Einzug in</p>
           <p>{data.einzugort?.ausZugIn.homeType}</p>
         </div>
       </div>
-      {/* Erledigt */}
-      {/* Vielen Dank, wir werden Sie so schnell wie möglich kontaktieren */}
 
-      {showSpinner && <Spin size='large' fullscreen />}
+      <Divider />
 
-      <div className={styles.stepsButtons}>
-        <Button
-          disabled={showSpinner}
-          size='large'
-          icon={<BsChevronLeft />}
-          type='text'
-          style={{ margin: "0 8px" }}
-          onClick={prev}
-        >
-          zurück
-        </Button>
-        <Button
-          size={"large"}
-          type='primary'
-          variant='solid'
-          color='purple'
-          icon={<BsSend />}
-          iconPosition='end'
-          onClick={send}
-          loading={showSpinner}
-        >
-          Senden
-        </Button>
+      {/*  */}
+      <div className={styles.lastStepContent}>
+        <h2>Für die Kontaktaufnahme benötigen wir folgende Information</h2>
+        <p>Für die Kontaktaufnahme benötigen wir folgende Information</p>
+        <br />
+        <FormProvider {...form}>
+          <form onSubmit={form.handleSubmit(submit)}>
+            <div className={styles.inputContainer}>
+              <InputX
+                name='phoneOrEmail'
+                placeholder=' E-Mail-Adresse oder Mobiltelefonnummer'
+                iconSuffix={<RiContactsLine />}
+                rules={{
+                  required: "Bitte geben Sie Ihre E-Mail-Adresse oder Mobiltelefonnummer an",
+                  pattern: {
+                    value: emailOrPhoneRegexInternational,
+                    message: "Bitte geben Sie Ihre E-Mail-Adresse oder Mobiltelefonnummer an",
+                  },
+                }}
+              />
+            </div>
+
+            <div className={styles.stepsButtons}>
+              <Button
+                disabled={showSpinner}
+                size='large'
+                icon={<BsChevronLeft />}
+                type='text'
+                style={{ margin: "0 8px" }}
+                onClick={prev}
+              >
+                zurück
+              </Button>
+              <Button
+                htmlType='submit'
+                size={"large"}
+                type='primary'
+                variant='solid'
+                color='purple'
+                icon={<BsSend />}
+                iconPosition='end'
+                loading={showSpinner}
+              >
+                Senden
+              </Button>
+            </div>
+          </form>
+        </FormProvider>
       </div>
+
+      {/*  */}
     </div>
   );
 }

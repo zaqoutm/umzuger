@@ -1,6 +1,6 @@
 import { Input, InputRef } from "antd";
-import { Ref } from "react";
-import { Controller, ValidationRule } from "react-hook-form";
+import { ReactNode, Ref } from "react";
+import { Controller, RegisterOptions, ValidationRule } from "react-hook-form";
 
 interface PropsType {
   name: string;
@@ -8,6 +8,8 @@ interface PropsType {
   pattern?: ValidationRule<RegExp>;
   isDisabled?: boolean;
   inputRef?: Ref<InputRef>;
+  rules?: RegisterOptions;
+  iconSuffix?: ReactNode;
 }
 
 export default function InputX(props: PropsType) {
@@ -16,9 +18,11 @@ export default function InputX(props: PropsType) {
   return (
     <Controller
       name={props.name}
+      rules={props.rules}
       render={({ field, fieldState }) => (
         <>
           <Input
+            suffix={props.iconSuffix}
             size='large'
             {...field}
             onChange={(e) => {
