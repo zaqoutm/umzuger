@@ -15,6 +15,9 @@ export default function LastStep({ prev, data }: PropsType) {
   const [showSpinner, setShowSpinner] = useState(false);
 
   function send() {
+    // sendEmail();
+    // we need email, phone, ...etc
+
     // TODOs:
     // send email
     // clean data
@@ -23,8 +26,6 @@ export default function LastStep({ prev, data }: PropsType) {
 
     setTimeout(() => {
       setShowSpinner(false);
-
-      console.log("email sent");
     }, 2000);
   }
 

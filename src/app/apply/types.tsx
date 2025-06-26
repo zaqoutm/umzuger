@@ -19,18 +19,19 @@ export type AuszugortType = {
     storageAreas?: string; // input max 4
   };
   laufweg: {
+    elevatorAvailable?: "ja" | "nein"; // radio
     parkzone?: string; //select
   };
   zusatzleistungen: {
-    packing: boolean;
-    dismantlingFurniture: boolean;
-    dismantlingKitchen: boolean;
-    provisionBoxes: boolean;
-    storageFurniture: boolean;
-    disposalFurniture: boolean;
-    finalCleaning: boolean;
-    furnitureLift: boolean;
-    establishParkingZone: boolean;
+    packing?: boolean;
+    dismantlingFurniture?: boolean;
+    dismantlingKitchen?: boolean;
+    provisionBoxes?: boolean;
+    storageFurniture?: boolean;
+    disposalFurniture?: boolean;
+    finalCleaning?: boolean;
+    furnitureLift?: boolean;
+    establishParkingZone?: boolean;
   };
 };
 
@@ -49,12 +50,12 @@ export type EinzugortType = {
     parkzone?: string; //select
   };
   zusatzleistungen: {
-    packing: boolean;
-    dismantlingFurniture: boolean;
-    dismantlingKitchen: boolean;
-    connectingWashingMachine: boolean;
-    drillingDowelingWork: boolean;
-    furnitureLift: boolean;
-    establishParkingZone: boolean;
+    packing?: boolean;
+    dismantlingFurniture?: boolean;
+    dismantlingKitchen?: boolean;
+    connectingWashingMachine?: boolean;
+    drillingDowelingWork?: boolean;
+    furnitureLift?: boolean;
+    establishParkingZone?: boolean;
   };
 };

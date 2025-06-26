@@ -1,10 +1,14 @@
+import EmailTemplate from "@/components/EmailTemplate";
 import WohinFormComponent from "@/components/where-form/page";
+import { sendEmail } from "@/lib/resend";
+import { Button } from "antd";
 import * as motion from "motion/react-client";
 import Image from "next/image";
 import Link from "next/link";
 import { BsWhatsapp } from "react-icons/bs";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
+import { FinalFormDataType } from "./apply/types";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -12,8 +16,28 @@ export default function Home() {
   const company_phone = "+49123456789";
   const whatsappPhone = "+49123456789";
 
+  const data: FinalFormDataType = {
+    auszugort: {
+      plz: "99999",
+      ausZugAus: {},
+      laufweg: {},
+      zusatzleistungen: {},
+    },
+    einzugort: { plz: "12345", ausZugIn: {}, laufweg: {}, zusatzleistungen: {} },
+  };
+
+  async function sendEmailNow() {
+    "use server";
+    sendEmail("Neue Anfrage", "Administrator", data);
+  }
+
   return (
     <div>
+      {/*  */}
+      <Button onClick={sendEmailNow}>Send email</Button>
+      <EmailTemplate firstName='Administrator' data={data} />
+      {/*  */}
+
       <div className={styles.introSection}>
         {/*  */}
         <motion.div
