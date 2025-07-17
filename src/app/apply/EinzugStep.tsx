@@ -5,6 +5,8 @@ import InputX from "@/components/inputs/InputX";
 import RadioX from "@/components/inputs/RadioX";
 import SelectX from "@/components/inputs/SelectX";
 import { Button } from "antd";
+import * as motion from "motion/react-client";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
@@ -22,7 +24,7 @@ interface PropsType {
 export default function EinzugStep({ next, data, prev }: PropsType) {
   const formEinzugsort = useForm<EinzugortType>({
     defaultValues: {
-      plz: "12345",
+      plz: undefined,
       ausZugIn: { homeType: "wohnung", floor: "2" },
       laufweg: {
         parkzone: "30",
@@ -42,9 +44,17 @@ export default function EinzugStep({ next, data, prev }: PropsType) {
     prev(formEinzugsort.getValues());
   }
   const [isStreetNumberDisabled, setIsStreetNumberDisabled] = useState(true);
-  const [showZimmerInput, setShowZimmer] = useState(true);
+
+  const searchParam = useSearchParams();
+  const plzRegex = /^\d{5}$/;
 
   useEffect(() => {
+    const nachParam = searchParam.get("nach");
+
+    if (nachParam && plzRegex.test(nachParam)) {
+      setValue("plz", nachParam);
+    }
+
     // set values
     if (data) {
       setValue("plz", data.plz);
@@ -74,11 +84,6 @@ export default function EinzugStep({ next, data, prev }: PropsType) {
         values: true,
       },
       callback: ({ values }) => {
-        if (values.ausZugIn.homeType === "zimmer") {
-          setShowZimmer(false);
-        } else {
-          setShowZimmer(true);
-        }
         if (values.street) {
           setIsStreetNumberDisabled(false);
         } else {
@@ -99,7 +104,17 @@ export default function EinzugStep({ next, data, prev }: PropsType) {
         <form onSubmit={formEinzugsort.handleSubmit(submit)}>
           {/*  */}
           <div className={styles.formBox}>
-            <h2>Einzugsort</h2>
+            <motion.div
+              key={data}
+              initial={{ x: 30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{
+                duration: 0.8,
+                ease: "anticipate",
+              }}
+            >
+              <h2>Einzugsort</h2>
+            </motion.div>
             <div className={styles.inputContainer}>
               <InputNumberX
                 name='plz'

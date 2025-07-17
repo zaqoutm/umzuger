@@ -24,12 +24,12 @@
   display: flex;
   align-items: center;
   background-color: rgb(92, 92, 92);
-  border-radius: 22px;
+  border-radius: 8px;
   padding: 5px 18px;
   gap: 6px;
   color: #fff;
   font-size: 12px;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .dev svg {
   width: 24px;
@@ -38,14 +38,7 @@
 }
 
 .dev:hover {
-  padding: 5px 24px;
-  background-color: rgb(101, 101, 101);
-  gap: 0;
-  border-radius: 8px;
-}
-.dev:hover svg {
-  scale: 1.2;
-  transform: translateX(-8px);
+  background-color: rgb(45, 45, 45);
 }
 
 .separator {

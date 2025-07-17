@@ -1,5 +1,6 @@
 "use client";
 import { Steps } from "antd";
+import * as motion from "motion/react-client";
 import { useEffect, useState } from "react";
 import AuszugortStep from "./AuszugortStep";
 import EinzugStep from "./EinzugStep";
@@ -14,12 +15,14 @@ export default function ApplyPage() {
   // store all data here
   const [finalFormData, setFinalFormData] = useState<FinalFormDataType>({});
 
+  const scrollTop = () => window.scrollTo(0, 0);
   const next = () => {
     setCurrent(currentStep + 1);
-    window.scrollTo(0, 0);
+    scrollTop();
   };
   const prev = () => {
     setCurrent(currentStep - 1);
+    scrollTop();
   };
 
   // handle auszugort form
@@ -28,7 +31,7 @@ export default function ApplyPage() {
     next();
   }
 
-  // handle Einzugort form, @next and prev
+  // handle Einzugort form, at next() and prev()
   function updateEinzugData(data: EinzugortType) {
     setFinalFormData((prevState) => ({ ...prevState, einzugort: data }));
     next();
@@ -50,17 +53,48 @@ export default function ApplyPage() {
       */}
 
       <div className={styles.stepper}>
-        <Steps size='small' items={steps} current={currentStep} labelPlacement='vertical' />
+        <Steps
+          size='small'
+          items={steps}
+          current={currentStep}
+          labelPlacement='vertical'
+          onChange={(v) => {
+            switch (v) {
+              case 0:
+                setCurrent(v);
+                break;
+              case 1:
+                if (finalFormData.auszugort) setCurrent(v);
+                break;
+              case 2:
+                window.scrollTo({
+                  top: document.body.scrollHeight,
+                  behavior: "smooth",
+                });
+                break;
+            }
+          }}
+        />
         {/*  */}
-        <div className={styles.stepContent}>
-          {currentStep == 0 ? (
-            <AuszugortStep next={updateAuszugData} data={finalFormData?.auszugort} />
-          ) : currentStep == 1 ? (
-            <EinzugStep prev={updateEinzugDataPrev} next={updateEinzugData} data={finalFormData?.einzugort} />
-          ) : (
-            <LastStep prev={prev} data={finalFormData} />
-          )}
-        </div>
+        <motion.div
+          key={currentStep}
+          initial={{ y: 40, opacity: 0, scale: 1.02 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.37,
+            ease: "easeIn",
+          }}
+        >
+          <div className={styles.stepContent}>
+            {currentStep == 0 ? (
+              <AuszugortStep next={updateAuszugData} data={finalFormData?.auszugort} />
+            ) : currentStep == 1 ? (
+              <EinzugStep prev={updateEinzugDataPrev} next={updateEinzugData} data={finalFormData?.einzugort} />
+            ) : (
+              <LastStep prev={prev} data={finalFormData} />
+            )}
+          </div>
+        </motion.div>
       </div>
     </div>
   );

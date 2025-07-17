@@ -6,6 +6,8 @@ import InputX from "@/components/inputs/InputX";
 import RadioX from "@/components/inputs/RadioX";
 import SelectX from "@/components/inputs/SelectX";
 import { Button } from "antd";
+import * as motion from "motion/react-client";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { BiChevronRight } from "react-icons/bi";
@@ -24,13 +26,13 @@ interface PropsType {
  *
  */
 function AuszugortStep({ next, data }: PropsType) {
-  // const searhParams = useSearchParams();
+  const searchParams = useSearchParams();
 
   const streetRef = useRef(null);
   const formxAuszugsort = useForm<AuszugortType>({
     defaultValues: {
-      plz: "12345",
-      ausZugAus: { homeType: "wohnung", degreeOfFurnishing: "low", floor: "2", rooms: undefined, livingSpace: "8" },
+      plz: "12333",
+      ausZugAus: { homeType: "wohnung", degreeOfFurnishing: "low", floor: "2", rooms: "2", livingSpace: "8" },
       laufweg: {
         parkzone: "30",
         elevatorAvailable: "no",
@@ -46,11 +48,15 @@ function AuszugortStep({ next, data }: PropsType) {
   const [isStreetNumberDisabled, setIsStreetNumberDisabled] = useState(true);
   const [showZimmerInput, setShowZimmer] = useState(true);
 
+  const plzRegex = /^\d{5}$/;
+
   /** */
   useEffect(() => {
-    // console.log(searhParams.get("x"));
-    // TODO: check regix
-    // set plz
+    const vonParam = searchParams.get("von");
+
+    if (vonParam && plzRegex.test(vonParam)) {
+      setValue("plz", vonParam);
+    }
 
     /**
      * set data if founded
@@ -122,7 +128,17 @@ function AuszugortStep({ next, data }: PropsType) {
         <form onSubmit={formxAuszugsort.handleSubmit(submit)}>
           {/*  */}
           <div className={styles.formBox}>
-            <h2>Auszugsort</h2>
+            <motion.div
+              key={data}
+              initial={{ x: 30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{
+                duration: 0.8,
+                ease: "anticipate",
+              }}
+            >
+              <h2>Auszugsort</h2>
+            </motion.div>
             <div className={styles.inputContainer}>
               <InputNumberX
                 name='plz'
@@ -131,7 +147,7 @@ function AuszugortStep({ next, data }: PropsType) {
                 maxLength={5}
                 rules={{
                   required: "PLZ. erforderlich",
-                  pattern: { value: /^\d{5}$/, message: "PLZ. muss 5 Ziffern haben" },
+                  pattern: { value: plzRegex, message: "PLZ. muss 5 Ziffern haben" },
                 }}
               />
             </div>
