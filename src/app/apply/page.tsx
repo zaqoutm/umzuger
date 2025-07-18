@@ -54,6 +54,7 @@ export default function ApplyPage() {
 
       <div className={styles.stepper}>
         <Steps
+          responsive={false}
           size='small'
           items={steps}
           current={currentStep}

@@ -36,6 +36,7 @@ const CustomRadioGroup = ({ name, options }: Props) => {
                 key={opt.value}
               >
                 <input
+                  name={name}
                   type='radio'
                   value={opt.value}
                   checked={field.value === opt.value}

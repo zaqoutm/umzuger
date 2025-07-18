@@ -1,12 +1,11 @@
+import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
 export default function Loading() {
   return (
     <div className='loadingPage'>
-      <div>
-        <Spin size='large' />
-      </div>
-      <h1>Bitte warten...</h1>
+      <Spin indicator={<LoadingOutlined style={{ fontSize: 48, color: "#9322c5" }} spin />} />
+      <p>Bitte warten...</p>
     </div>
   );
 }
