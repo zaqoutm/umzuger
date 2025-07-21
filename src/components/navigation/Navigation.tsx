@@ -13,7 +13,7 @@ export default function Navigation() {
       <div className={styles.navContainer}>
         <div className={styles.logo}>
           <Link href={"/"}>
-            <Image src='/next.svg' alt='Logo' width={width_height} height={width_height} loading='eager' />
+            <Image priority src='/next.svg' alt='Logo' width={width_height} height={width_height} loading='eager' />
           </Link>
         </div>
         <div className={styles.socialLinks}>

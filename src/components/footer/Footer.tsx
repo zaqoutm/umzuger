@@ -9,7 +9,7 @@ export default function Footer() {
     <div className={styles.footer}>
       <div className={styles.footerContainer}>
         <Link href={"/"}>
-          <Image src='/next.svg' alt='logo' width={width_height} height={width_height} loading='eager' />
+          <Image priority src='/next.svg' alt='logo' width={width_height} height={width_height} loading='eager' />
         </Link>
         <Link href={"https://github.com/zaqoutm"} className={styles.dev} target='_blank'>
           <IoLogoGithub size={21} />

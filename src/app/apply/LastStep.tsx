@@ -1,7 +1,7 @@
 "use client";
 import InputX from "@/components/inputs/InputX";
 import { sendEmail } from "@/lib/resend";
-import { Button, Divider, Spin } from "antd";
+import { Button, Divider, Spin, message } from "antd";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -31,24 +31,31 @@ export default function LastStep({ prev, data }: PropsType) {
   }
 
   async function sendEmailNow(data: FinalFormDataType) {
-    const result = await sendEmail("Neu aufgabe", "Boss", data);
-    console.log(result);
-    setShowSpinner(!showSpinner);
+    const result = await sendEmail("Neu aufgabe", "Admin", data);
+
+    setShowSpinner(true);
 
     if (result.data?.id) {
-      // TODO: push on success page
-      router.push("/");
+      router.push("/success");
     } else {
-      setShowSpinner(!showSpinner);
-      console.log(result.error);
+      setTimeout(() => {
+        setShowSpinner(false);
+        // console.log(result.error);
+        messageApi.open({
+          type: "error",
+          content: "Entschuldigung, etwas ist schiefgelaufen!",
+        });
+      }, 1000);
     }
   }
 
   const emailOrPhoneRegexInternational = /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|\+?\d[\d\s\-()]{5,})$/;
+  const [messageApi, contextHolder] = message.useMessage();
 
   return (
     <div className={styles.lastStep}>
       {showSpinner && <Spin size='large' fullscreen />}
+      {contextHolder}
 
       {/*  */}
       <div className={styles.lastStepContent}>
@@ -127,6 +134,7 @@ export default function LastStep({ prev, data }: PropsType) {
                 color='purple'
                 icon={<BsSend />}
                 iconPosition='end'
+                disabled={showSpinner}
                 loading={showSpinner}
               >
                 Senden
