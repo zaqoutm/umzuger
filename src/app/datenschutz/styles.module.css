@@ -1,0 +1,22 @@
+.page {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 46px 12px;
+}
+
+.page h1 {
+  font-size: 34px;
+}
+.page h2 {
+  margin-top: 28px;
+  margin-bottom: 4px;
+  color: var(--secondary);
+}
+
+.page p {
+  padding: 4px 0;
+}
+
+.page a {
+  color: blue;
+}

@@ -4,6 +4,7 @@ import { IoLogoGithub } from "react-icons/io5";
 import styles from "./styles.module.css";
 
 export default function Footer() {
+  const company_name = process.env.COMPANY_NAME;
   const width_height = 18;
   return (
     <div className={styles.footer}>
@@ -18,9 +19,9 @@ export default function Footer() {
       </div>
       <div className={styles.separator} />
       <div className={styles.links}>
-        <p>.FirmaX.©</p>
-        <Link href={"#"}>Datenschutz</Link>
-        <Link href={"#"}>Cookie-Einstellungen</Link>
+        <p>.{company_name}.©</p>
+        <Link href={"/datenschutz"}>Datenschutz</Link>
+        {/* <Link href={"#"}>Cookie-Einstellungen</Link> */}
       </div>
     </div>
   );

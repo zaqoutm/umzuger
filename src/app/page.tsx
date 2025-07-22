@@ -3,13 +3,12 @@ import * as motion from "motion/react-client";
 import Image from "next/image";
 import Link from "next/link";
 import { BsWhatsapp } from "react-icons/bs";
-import { CiClock2, CiLocationOn } from "react-icons/ci";
 import { FiPhoneCall } from "react-icons/fi";
-import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const company_name = process.env.COMPANY_NAME;
   const company_email = process.env.COMPANY_EMAIL;
   const company_phone = process.env.COMPANY_PHONE;
   const whatsappPhone = process.env.COMPANY_PHONE;
@@ -45,7 +44,7 @@ export default function Home() {
 
         {/*  */}
         <div className={styles.introSectionTitle}>
-          <h1>[Company] Lösungen</h1>
+          <h1>{company_name} Lösungen</h1>
           <p>Wie können wir Ihnen helfen?</p>
         </div>
 
@@ -104,16 +103,12 @@ export default function Home() {
           {/* contact section */}
           <div className={styles.contactSectionInfo}>
             <div>
-              <h3 className='flex'>
-                Anschrift <CiLocationOn size={21} />
-              </h3>
+              <h3 className='flex'>Anschrift</h3>
               <p>Mountain View, CA 94043</p>
             </div>
             {/* contact */}
             <div>
-              <h3 className='flex'>
-                Kontakt <IoChatboxEllipsesOutline size={21} />
-              </h3>
+              <h3 className='flex'>Kontakt</h3>
               <div className={styles.contact}>
                 <Link href={`tel:${company_phone}`}>
                   <FiPhoneCall size={18} /> {company_phone}
@@ -127,10 +122,7 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <h3 className='flex'>
-                Bürozeiten
-                <CiClock2 size={21} />
-              </h3>
+              <h3 className='flex'>Bürozeiten</h3>
               <div className={styles.contact}>
                 <p>Mo - Fr 07.00 - 20.00 Uhr</p>
                 <p>Samstag 08.00 - 18.00 Uhr</p>

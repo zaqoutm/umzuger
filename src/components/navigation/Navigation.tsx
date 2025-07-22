@@ -5,6 +5,7 @@ import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import styles from "./styles.module.css";
 
 export default function Navigation() {
+  const company_name = process.env.COMPANY_NAME_SOCIAL;
   const width_height = 18;
 
   return (
@@ -17,13 +18,13 @@ export default function Navigation() {
           </Link>
         </div>
         <div className={styles.socialLinks}>
-          <Link href={"https://instagram.com/companyname"} target='_blank'>
+          <Link href={`https://instagram.com/${company_name}`} target='_blank'>
             <FaInstagram size={24} />
           </Link>
-          <Link href={"https://facebook.com/companyname"} target='_blank'>
+          <Link href={`https://facebook.com/${company_name}`} target='_blank'>
             <FaFacebookF size={24} />
           </Link>
-          <Link href={"https://x.com/companyname"} target='_blank'>
+          <Link href={`https://x.com/${company_name}`} target='_blank'>
             <BsTwitterX size={24} />
           </Link>
         </div>
