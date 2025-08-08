@@ -1,8 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
-import { BsTwitterX } from "react-icons/bs";
-import { FaFacebookF, FaInstagram } from "react-icons/fa";
-import styles from "./styles.module.css";
+import Image from 'next/image';
+import Link from 'next/link';
+import { BsTwitterX } from 'react-icons/bs';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import styles from './styles.module.css';
 
 export default function Navigation() {
   const company_name = process.env.COMPANY_NAME_SOCIAL;
@@ -13,8 +13,8 @@ export default function Navigation() {
       {/*  */}
       <div className={styles.navContainer}>
         <div className={styles.logo}>
-          <Link href={"/"}>
-            <Image priority src='/next.svg' alt='Logo' width={width_height} height={width_height} loading='eager' />
+          <Link href={'/'}>
+            <Image priority src='/logo.svg' alt='Logo' width={width_height} height={width_height} loading='eager' />
           </Link>
         </div>
         <div className={styles.socialLinks}>
