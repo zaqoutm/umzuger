@@ -4,7 +4,7 @@ import { IoLogoGithub } from 'react-icons/io5';
 import styles from './styles.module.css';
 
 export default function Footer() {
-  const company_name = process.env.COMPANY_NAME;
+  const company_name = process.env.NEXT_PUBLIC_COMPANY_NAME;
   const width_height = 18;
   return (
     <div className={styles.footer}>

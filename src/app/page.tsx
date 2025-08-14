@@ -1,17 +1,17 @@
-import WohinFormComponent from "@/components/where-form/page";
-import * as motion from "motion/react-client";
-import Image from "next/image";
-import Link from "next/link";
-import { BsWhatsapp } from "react-icons/bs";
-import { FiPhoneCall } from "react-icons/fi";
-import { MdOutlineEmail } from "react-icons/md";
-import styles from "./page.module.css";
+import WohinFormComponent from '@/components/where-form/page';
+import * as motion from 'motion/react-client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { BsWhatsapp } from 'react-icons/bs';
+import { FiPhoneCall } from 'react-icons/fi';
+import { MdOutlineEmail } from 'react-icons/md';
+import styles from './page.module.css';
 
 export default function Home() {
-  const company_name = process.env.COMPANY_NAME;
-  const company_email = process.env.COMPANY_EMAIL;
-  const company_phone = process.env.COMPANY_PHONE;
-  const whatsappPhone = process.env.COMPANY_PHONE;
+  const company_name = process.env.NEXT_PUBLIC_COMPANY_NAME;
+  const company_email = process.env.NEXT_PUBLIC_COMPANY_EMAIL;
+  const company_phone = process.env.NEXT_PUBLIC_COMPANY_PHONE;
+  const whatsappPhone = process.env.NEXT_PUBLIC_COMPANY_PHONE;
 
   return (
     <div>
@@ -28,9 +28,9 @@ export default function Home() {
           transition={{
             duration: 10,
             repeat: Infinity,
-            repeatType: "reverse",
+            repeatType: 'reverse',
           }}
-          className={`${styles["block"]} ${styles["firstBlock"]}`}
+          className={`${styles['block']} ${styles['firstBlock']}`}
         >
           <p>Umzüge</p>
           <svg width='28' height='26' viewBox='0 0 35 33' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -55,7 +55,7 @@ export default function Home() {
             transition={{
               duration: 10,
               repeat: Infinity,
-              repeatType: "reverse",
+              repeatType: 'reverse',
             }}
             className={styles.block}
           >
@@ -67,7 +67,7 @@ export default function Home() {
             transition={{
               duration: 5,
               repeat: Infinity,
-              repeatType: "reverse",
+              repeatType: 'reverse',
             }}
             className={styles.block}
           >
@@ -96,7 +96,7 @@ export default function Home() {
           <WohinFormComponent />
 
           <div className={styles.transportImage}>
-            <Image src={"/Moving-pana-4.svg"} alt='umzug bild' width={1000} height={24} loading='eager' />
+            <Image src={'/Moving-pana-4.svg'} alt='umzug bild' width={1000} height={24} loading='eager' />
           </div>
 
           {/*  */}
@@ -132,7 +132,7 @@ export default function Home() {
           </div>
 
           <div className={styles.transportImage}>
-            <Image src={"/Moving-pana-2.svg"} alt='umzug bild' width={1000} height={24} loading='eager' />
+            <Image src={'/Moving-pana-2.svg'} alt='umzug bild' width={1000} height={24} loading='eager' />
           </div>
         </div>
       </div>

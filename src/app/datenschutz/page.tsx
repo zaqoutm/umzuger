@@ -1,16 +1,16 @@
-import Link from "next/link";
-import styles from "./styles.module.css";
+import Link from 'next/link';
+import styles from './styles.module.css';
 
 export const metadata = {
-  title: "Datenschutzerklärung | PrivacyPolicy",
-  description: "Informationen zum Datenschutz gemäß DSGVO.",
+  title: 'Datenschutzerklärung | PrivacyPolicy',
+  description: 'Informationen zum Datenschutz gemäß DSGVO.',
 };
 
 export default function page() {
-  const company_name = process.env.COMPANY_NAME ?? "example";
-  const company_email = process.env.COMPANY_EMAIL ?? "info@example.de";
-  const company_phone = process.env.COMPANY_PHONE ?? "+49-123456";
-  const company_address = process.env.COMPANY_ADDRESS ?? "adress";
+  const company_name = process.env.NEXT_PUBLIC_COMPANY_NAME ?? 'example';
+  const company_email = process.env.NEXT_PUBLIC_COMPANY_EMAIL ?? 'info@example.de';
+  const company_phone = process.env.NEXT_PUBLIC_COMPANY_PHONE ?? '+49-123456';
+  const company_address = process.env.NEXT_PUBLIC_COMPANY_ADDRESS ?? 'adress';
 
   return (
     <div className={styles.page}>

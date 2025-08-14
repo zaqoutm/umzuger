@@ -5,7 +5,7 @@ import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import styles from './styles.module.css';
 
 export default function Navigation() {
-  const company_name = process.env.COMPANY_NAME_SOCIAL;
+  const company_name = process.env.NEXT_PUBLIC_COMPANY_NAME_SOCIAL;
   const width_height = 18;
 
   return (
