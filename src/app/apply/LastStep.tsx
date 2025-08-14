@@ -1,15 +1,14 @@
-"use client";
-import InputX from "@/components/inputs/InputX";
-import { sendEmail } from "@/lib/resend";
-import { Button, Divider, Spin, message } from "antd";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { BsChevronLeft, BsSend } from "react-icons/bs";
-import { RiContactsLine } from "react-icons/ri";
-import { TbMeterSquare } from "react-icons/tb";
-import styles from "./styles.module.css";
-import { Customer, FinalFormDataType } from "./types";
+'use client';
+import InputX from '@/components/inputs/InputX';
+import { Button, Divider, Spin, message } from 'antd';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { BsChevronLeft, BsSend } from 'react-icons/bs';
+import { RiContactsLine } from 'react-icons/ri';
+import { TbMeterSquare } from 'react-icons/tb';
+import styles from './styles.module.css';
+import { Customer, FinalFormDataType } from './types';
 
 type PropsType = {
   prev: any;
@@ -31,19 +30,23 @@ export default function LastStep({ prev, data }: PropsType) {
   }
 
   async function sendEmailNow(data: FinalFormDataType) {
-    const result = await sendEmail("Neu aufgabe", "Admin", data);
+    const result = await fetch('http://localhost:3001/api/send', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
     setShowSpinner(true);
 
-    if (result.data?.id) {
-      router.push("/success");
+    if (result.status == 200) {
+      router.push('/success');
     } else {
       setTimeout(() => {
         setShowSpinner(false);
         // console.log(result.error);
         messageApi.open({
-          type: "error",
-          content: "Entschuldigung, etwas ist schiefgelaufen!",
+          type: 'error',
+          content: 'Entschuldigung, etwas ist schiefgelaufen!',
         });
       }, 1000);
     }
@@ -106,10 +109,10 @@ export default function LastStep({ prev, data }: PropsType) {
                 placeholder=' E-Mail-Adresse oder Mobiltelefonnummer'
                 iconSuffix={<RiContactsLine />}
                 rules={{
-                  required: "Bitte geben Sie Ihre E-Mail-Adresse oder Mobiltelefonnummer an",
+                  required: 'Bitte geben Sie Ihre E-Mail-Adresse oder Mobiltelefonnummer an',
                   pattern: {
                     value: emailOrPhoneRegexInternational,
-                    message: "Bitte geben Sie Ihre E-Mail-Adresse oder Mobiltelefonnummer an",
+                    message: 'Bitte geben Sie Ihre E-Mail-Adresse oder Mobiltelefonnummer an',
                   },
                 }}
               />
@@ -121,14 +124,14 @@ export default function LastStep({ prev, data }: PropsType) {
                 size='large'
                 icon={<BsChevronLeft />}
                 type='text'
-                style={{ margin: "0 8px" }}
+                style={{ margin: '0 8px' }}
                 onClick={prev}
               >
                 zurück
               </Button>
               <Button
                 htmlType='submit'
-                size={"large"}
+                size={'large'}
                 type='primary'
                 variant='solid'
                 color='purple'
