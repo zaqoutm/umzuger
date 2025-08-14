@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { BsTwitterX } from 'react-icons/bs';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
@@ -6,7 +5,6 @@ import styles from './styles.module.css';
 
 export default function Navigation() {
   const company_name = process.env.NEXT_PUBLIC_COMPANY_NAME_SOCIAL;
-  const width_height = 18;
 
   return (
     <div className={styles.nav}>
@@ -14,7 +12,7 @@ export default function Navigation() {
       <div className={styles.navContainer}>
         <div className={styles.logo}>
           <Link href={'/'}>
-            <Image priority src='/logo.svg' alt='Logo' width={width_height} height={width_height} loading='eager' />
+            <img src='/logo.svg' alt='Logo' />
           </Link>
         </div>
         <div className={styles.socialLinks}>

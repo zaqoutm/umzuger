@@ -8,7 +8,7 @@ import { MdOutlineEmail } from 'react-icons/md';
 import styles from './page.module.css';
 
 export default function Home() {
-  const company_name = process.env.NEXT_PUBLIC_COMPANY_NAME;
+  const company_name = process.env.COMPANY_NAME;
   const company_email = process.env.NEXT_PUBLIC_COMPANY_EMAIL;
   const company_phone = process.env.NEXT_PUBLIC_COMPANY_PHONE;
   const whatsappPhone = process.env.NEXT_PUBLIC_COMPANY_PHONE;
