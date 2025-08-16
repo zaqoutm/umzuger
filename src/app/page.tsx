@@ -1,18 +1,15 @@
 import WohinFormComponent from '@/components/where-form/page';
+import { COMPANY_ADDRESS, COMPANY_EMAIL, COMPANY_NAME, COMPANY_PHONE, COMPANY_WHATSAPP } from '@/config';
 import * as motion from 'motion/react-client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsWhatsapp } from 'react-icons/bs';
 import { FiPhoneCall } from 'react-icons/fi';
 import { MdOutlineEmail } from 'react-icons/md';
+import config from '../../next.config';
 import styles from './page.module.css';
 
 export default function Home() {
-  const company_name = process.env.COMPANY_NAME;
-  const company_email = process.env.NEXT_PUBLIC_COMPANY_EMAIL;
-  const company_phone = process.env.NEXT_PUBLIC_COMPANY_PHONE;
-  const whatsappPhone = process.env.NEXT_PUBLIC_COMPANY_PHONE;
-
   return (
     <div>
       {/*  */}
@@ -44,7 +41,7 @@ export default function Home() {
 
         {/*  */}
         <div className={styles.introSectionTitle}>
-          <h1>{company_name} Lösungen</h1>
+          <h1>{COMPANY_NAME} Lösungen</h1>
           <p>Wie können wir Ihnen helfen?</p>
         </div>
 
@@ -96,7 +93,13 @@ export default function Home() {
           <WohinFormComponent />
 
           <div className={styles.transportImage}>
-            <Image src={'/Moving-pana-4.svg'} alt='umzug bild' width={1000} height={24} loading='eager' />
+            <Image
+              src={`${config.basePath}/Moving-pana-4.svg`}
+              alt='umzug bild'
+              width={1000}
+              height={24}
+              loading='eager'
+            />
           </div>
 
           {/*  */}
@@ -104,20 +107,20 @@ export default function Home() {
           <div className={styles.contactSectionInfo}>
             <div>
               <h3 className='flex'>Anschrift</h3>
-              <p>Mountain View, CA 94043</p>
+              <p>{COMPANY_ADDRESS}</p>
             </div>
             {/* contact */}
             <div>
               <h3 className='flex'>Kontakt</h3>
               <div className={styles.contact}>
-                <Link href={`tel:${company_phone}`}>
-                  <FiPhoneCall size={18} /> {company_phone}
+                <Link href={`tel:${COMPANY_PHONE}`}>
+                  <FiPhoneCall size={18} /> {COMPANY_PHONE}
                 </Link>
-                <Link href={`https://wa.me/${whatsappPhone}`}>
-                  <BsWhatsapp size={18} /> {whatsappPhone}
+                <Link href={`https://wa.me/${COMPANY_WHATSAPP}`}>
+                  <BsWhatsapp size={18} /> {COMPANY_WHATSAPP}
                 </Link>
-                <Link href={`mailto:${company_email}`}>
-                  <MdOutlineEmail size={18} /> {company_email}
+                <Link href={`mailto:${COMPANY_EMAIL}`}>
+                  <MdOutlineEmail size={18} /> {COMPANY_EMAIL}
                 </Link>
               </div>
             </div>
@@ -132,7 +135,13 @@ export default function Home() {
           </div>
 
           <div className={styles.transportImage}>
-            <Image src={'/Moving-pana-2.svg'} alt='umzug bild' width={1000} height={24} loading='eager' />
+            <Image
+              src={`${config.basePath}/Moving-pana-2.svg`}
+              alt='umzug bild'
+              width={1000}
+              height={24}
+              loading='eager'
+            />
           </div>
         </div>
       </div>

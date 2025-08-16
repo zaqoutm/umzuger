@@ -1,7 +1,8 @@
-import Image from "next/image";
-import { Controller } from "react-hook-form";
-import { FcInfo } from "react-icons/fc";
-import styles from "./styles.module.css";
+import Image from 'next/image';
+import { Controller } from 'react-hook-form';
+import { FcInfo } from 'react-icons/fc';
+import config from '../../../next.config';
+import styles from './styles.module.css';
 
 type Option = {
   value: string;
@@ -32,7 +33,7 @@ const CustomRadioGroup = ({ name, options }: Props) => {
             {/*  */}
             {options.map((opt) => (
               <label
-                className={styles.label + " " + `${field.value === opt.value ? styles.checked : ""}`}
+                className={styles.label + ' ' + `${field.value === opt.value ? styles.checked : ''}`}
                 key={opt.value}
               >
                 <input
@@ -43,11 +44,17 @@ const CustomRadioGroup = ({ name, options }: Props) => {
                   onChange={() => {
                     field.onChange(opt.value);
                   }}
-                  style={{ display: "none" }}
+                  style={{ display: 'none' }}
                 />
 
                 <div className={styles.image}>
-                  <Image src={"/" + opt.image} alt={opt.label} width={111} height={111} loading='eager' />
+                  <Image
+                    src={`${config.basePath}/${opt.image}`}
+                    alt={opt.label}
+                    width={111}
+                    height={111}
+                    loading='eager'
+                  />
                   {/* <h1>image</h1> */}
                 </div>
 
