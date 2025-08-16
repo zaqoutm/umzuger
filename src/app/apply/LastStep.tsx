@@ -30,9 +30,9 @@ export default function LastStep({ prev, data }: PropsType) {
   }
 
   async function sendEmailNow(data: FinalFormDataType) {
-    const API_URL = await fetch(`${BASE_PATH}/config.json`).then((result) => result.json());
+    const json = await fetch(`${BASE_PATH}/config.json`).then((result) => result.json());
 
-    const result = await fetch(API_URL, {
+    const result = await fetch(json['API_URL'], {
       method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' },
