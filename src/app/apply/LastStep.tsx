@@ -1,5 +1,6 @@
 'use client';
 import InputX from '@/components/inputs/InputX';
+import { BASE_PATH } from '@/config';
 import { Button, Divider, Spin, message } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -21,16 +22,17 @@ export default function LastStep({ prev, data }: PropsType) {
   const router = useRouter();
 
   function submit(customerInputData: any) {
-    const xx: FinalFormDataType = {
+    sendEmailNow({
       auszugort: data.auszugort,
       einzugort: data.einzugort,
       customer: { phoneOrEmail: customerInputData.phoneOrEmail },
-    };
-    sendEmailNow(xx);
+    });
   }
 
   async function sendEmailNow(data: FinalFormDataType) {
-    const result = await fetch('http://localhost:3001/api/send', {
+    const API_URL = await fetch(`${BASE_PATH}/config.json`).then((result) => result.json());
+
+    const result = await fetch(API_URL, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' },

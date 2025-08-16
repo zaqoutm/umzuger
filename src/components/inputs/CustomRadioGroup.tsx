@@ -1,7 +1,7 @@
+import { BASE_PATH } from '@/config';
 import Image from 'next/image';
 import { Controller } from 'react-hook-form';
 import { FcInfo } from 'react-icons/fc';
-import config from '../../../next.config';
 import styles from './styles.module.css';
 
 type Option = {
@@ -48,13 +48,7 @@ const CustomRadioGroup = ({ name, options }: Props) => {
                 />
 
                 <div className={styles.image}>
-                  <Image
-                    src={`${config.basePath}/${opt.image}`}
-                    alt={opt.label}
-                    width={111}
-                    height={111}
-                    loading='eager'
-                  />
+                  <Image src={`${BASE_PATH}/${opt.image}`} alt={opt.label} width={111} height={111} loading='eager' />
                   {/* <h1>image</h1> */}
                 </div>
 

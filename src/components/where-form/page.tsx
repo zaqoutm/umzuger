@@ -1,11 +1,11 @@
-"use client";
-import type { FormProps } from "antd";
-import { Button, Form, Input, Space } from "antd";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { GrFormNextLink } from "react-icons/gr";
-import { IoLocationSharp } from "react-icons/io5";
-import styles from "./styles.module.css";
+'use client';
+import type { FormProps } from 'antd';
+import { Button, Form, Input, Space } from 'antd';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { GrFormNextLink } from 'react-icons/gr';
+import { IoLocationSharp } from 'react-icons/io5';
+import styles from './styles.module.css';
 
 export default function WohinFormComponent() {
   const router = useRouter();
@@ -18,12 +18,12 @@ export default function WohinFormComponent() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
+  const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     setIsSubmitting(true);
     router.push(`/apply?von=${values.von}&nach=${values.nach}`);
   };
 
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {};
+  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {};
 
   return (
     <div className={styles.formSection}>

@@ -1,8 +1,7 @@
-import { COMPANY_NAME } from '@/config';
+import { BASE_PATH, COMPANY_NAME } from '@/config';
 import Image from 'next/image';
 import Link from 'next/link';
 import { IoLogoGithub } from 'react-icons/io5';
-import config from '../../../next.config';
 import styles from './styles.module.css';
 
 export default function Footer() {
@@ -13,7 +12,7 @@ export default function Footer() {
         <Link href={'/'}>
           <Image
             priority
-            src={`${config.basePath}/logo.svg`}
+            src={`${BASE_PATH}/logo.svg`}
             alt='logo'
             width={width_height}
             height={width_height}

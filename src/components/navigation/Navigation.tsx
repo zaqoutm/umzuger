@@ -1,18 +1,27 @@
-import { COMPANY_NAME_SOCIAL } from '@/config';
+import { BASE_PATH, COMPANY_NAME_SOCIAL } from '@/config';
+import Image from 'next/image';
 import Link from 'next/link';
 import { BsTwitterX } from 'react-icons/bs';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
-import config from '../../../next.config';
 import styles from './styles.module.css';
 
 export default function Navigation() {
+  const width_height = 18;
+
   return (
     <div className={styles.nav}>
       {/*  */}
       <div className={styles.navContainer}>
         <div className={styles.logo}>
           <Link href={'/'}>
-            <img src={`${config.basePath}/logo.svg`} alt='Logo' />
+            <Image
+              priority
+              src={`${BASE_PATH}/logo.svg`}
+              alt='Logo'
+              width={width_height}
+              height={width_height}
+              loading='eager'
+            />
           </Link>
         </div>
         <div className={styles.socialLinks}>

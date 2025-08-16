@@ -1,12 +1,11 @@
 import WohinFormComponent from '@/components/where-form/page';
-import { COMPANY_ADDRESS, COMPANY_EMAIL, COMPANY_NAME, COMPANY_PHONE, COMPANY_WHATSAPP } from '@/config';
+import { BASE_PATH, COMPANY_ADDRESS, COMPANY_EMAIL, COMPANY_NAME, COMPANY_PHONE, COMPANY_WHATSAPP } from '@/config';
 import * as motion from 'motion/react-client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsWhatsapp } from 'react-icons/bs';
 import { FiPhoneCall } from 'react-icons/fi';
 import { MdOutlineEmail } from 'react-icons/md';
-import config from '../../next.config';
 import styles from './page.module.css';
 
 export default function Home() {
@@ -93,13 +92,7 @@ export default function Home() {
           <WohinFormComponent />
 
           <div className={styles.transportImage}>
-            <Image
-              src={`${config.basePath}/Moving-pana-4.svg`}
-              alt='umzug bild'
-              width={1000}
-              height={24}
-              loading='eager'
-            />
+            <Image src={`${BASE_PATH}/Moving-pana-4.svg`} alt='umzug bild' width={1000} height={24} loading='eager' />
           </div>
 
           {/*  */}
@@ -135,13 +128,7 @@ export default function Home() {
           </div>
 
           <div className={styles.transportImage}>
-            <Image
-              src={`${config.basePath}/Moving-pana-2.svg`}
-              alt='umzug bild'
-              width={1000}
-              height={24}
-              loading='eager'
-            />
+            <Image src={`${BASE_PATH}/Moving-pana-2.svg`} alt='umzug bild' width={1000} height={24} loading='eager' />
           </div>
         </div>
       </div>
